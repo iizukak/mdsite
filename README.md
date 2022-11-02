@@ -40,6 +40,12 @@ $ cd potage
 $ pip3 install -e .
 ```
 
+If you want to debug potage, Please execute
+
+```
+$ pip3 install -e ".[dev]"
+```
+
 ## Usage
 
 ### Command
@@ -66,6 +72,7 @@ title: Taro Yamada's Home Page
 author: Taro Yamada
 input_dir: in
 output_dir: out
+date_format: YYYYMMDD
 ```
 
 ### Unit Test
