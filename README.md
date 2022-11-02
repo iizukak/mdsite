@@ -2,6 +2,8 @@
 
 Minimal Static Site Generator.
 
+The demo site is [here]().
+
 ## What potage do
 
 potage convert .md files into .html files in the same directory structure.
@@ -27,10 +29,6 @@ out/static/image.jpeg
 
 In the current directory, you should have `potage.yaml` configuration file.
 Please check `Usage` section.
-
-## Demo
-
-The demo site is [here]().
 
 ## Installation
 
