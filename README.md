@@ -68,26 +68,25 @@ input_dir: in
 output_dir: out
 ```
 
-### Documentation Guide
-
-- Converted `index.html` includes the automatically generated table of contents.
-- Each MarkDown file's first `#` in will be the page title
-- MathJax is available for Mathematical equations
-- potage copy `static` directory to the output directory
-
 ### Unit Test
 
 ```
 $ pytest .
 ```
 
+## Documentation Guide
+
+- Converted `index.html` includes the automatically generated table of contents.
+- Each MarkDown file's first `#` in will be the page title.
+- potage copy `static` directory to the output directory.
+
 ## FAQ
 
 - Why potage generates poorly styled sites?
-  - For minimalism, I decided to use user agent (browsers default) stylesheets with minimal modification.
+  - For the minimalism, potage use user agent (browsers default) stylesheets with minimal modification.
   - I assume that user agent stylesheets will maintain by Browser developers. The lifespan is long enough.
 - Can I change CSS template?
-  - NO. If you want to change templates, Please fork potage and change `template/porage.css`.
+  - NO. If you want to change templates, Please fork potage and change `template/potage.css`.
 - Can I change config file name?
   - NO
 
