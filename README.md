@@ -1,10 +1,10 @@
-# noml
+# potage
 
-Extremely Simple Static Site Generator.
+Minimal Static Site Generator.
 
-## What noml do
+## What potage do
 
-noml convert .md files into .html files in the same directory structure.
+potage convert .md files into .html files in the same directory structure.
 
 For example, if you have these files,
 
@@ -12,10 +12,10 @@ For example, if you have these files,
 in/index.md
 in/foo/bar.md
 in/static/image.jpeg
-noml.yaml
+potage.yaml
 ```
 
-by executing `noml` command, you will get these outputs.
+by executing `potage` command, you will get these outputs.
 
 ```
 out/index.html
@@ -25,7 +25,7 @@ out/static/image.jpeg
 
 `out/index.html` automatically includes a table of contents.
 
-In the current directory, you should have `noml.yaml` configuration file.
+In the current directory, you should have `potage.yaml` configuration file.
 Please check `Usage` section.
 
 ## Demo
@@ -34,13 +34,13 @@ The demo site is [here]().
 
 ## Installation
 
-noml requires Python3.7 or later.
+potage requires Python3.7 or later.
 
-To install `noml`, execute the below commands.
+To install `potage`, execute the below commands.
 
 ```
-$ git clone git@github.com:iizukak/noml.git
-$ cd noml
+$ git clone git@github.com:iizukak/potage.git
+$ cd potage
 $ pip3 install -e .
 ```
 
@@ -51,18 +51,18 @@ $ pip3 install -e .
 To show help message, please execute
 
 ```
-$ noml help
+$ potage help
 ```
 
-Usually, typing `noml` without argument is enough.
+Usually, typing `potage` without argument is enough.
 
 ```
-$ noml
+$ potage
 ```
 
 ### Configuration
 
-You should write some settings in `noml.yaml`. The template is here.
+You should write some settings in `potage.yaml`. The template is here.
 
 ```yaml
 title: The Home Page
