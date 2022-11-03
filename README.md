@@ -89,13 +89,12 @@ $ pytest .
 
 ## FAQ
 
-- Why potage generates poorly styled sites?
-  - For the minimalism, potage use user agent (browsers default) stylesheets with minimal modification.
-  - I assume that user agent stylesheets will maintain by Browser developers. The lifespan is long enough.
-- Can I change CSS template?
-  - NO. If you want to change templates, Please fork potage and change `template/potage.css`.
-- Can I change config file name?
-  - NO
+- Which CSS framework potage use?
+  - [MVP.css](https://github.com/andybrewer/mvp/)
+- Can I change CSS style?
+  - Currently NO. If you have request, please write an [issue](https://github.com/iizukak/potage/issues).
+- Can I change the config file name?
+  - NO.
 
 ## License
 
