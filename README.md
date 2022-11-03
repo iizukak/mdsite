@@ -64,16 +64,7 @@ $ potage
 
 ### Configuration
 
-You should write some settings in `potage.yaml`.
-Here is the template.
-
-```yaml
-title: Taro Yamada's Home Page
-author: Taro Yamada
-input_dir: in
-output_dir: out
-date_format: YYYYMMDD
-```
+You should write some settings in `potage.yaml`.Please check this repository's root directory.
 
 ### Unit Test
 
@@ -83,6 +74,7 @@ $ pytest .
 
 ## Documentation Guide
 
+- `index.md` is required.
 - Converted `index.html` includes the automatically generated table of contents.
 - Each MarkDown file's first `#` in will be the page title.
 - potage copy `static` directory to the output directory.
@@ -90,11 +82,9 @@ $ pytest .
 ## FAQ
 
 - Which CSS framework potage use?
-  - [MVP.css](https://github.com/andybrewer/mvp/)
+  - [MVP.css](https://github.com/andybrewer/mvp/).
 - Can I change CSS style?
   - Currently NO. If you have request, please write an [issue](https://github.com/iizukak/potage/issues).
-- Can I change the config file name?
-  - NO.
 
 ## License
 
