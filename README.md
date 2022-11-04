@@ -6,7 +6,7 @@ The demo site is [here]().
 
 ## What potage do
 
-potage converts .md files into .html files in the same directory structure.
+potage converts `.md` files into `.html` files in the same directory structure.
 
 For example, if you have these files,
 
@@ -30,61 +30,66 @@ Please check `Usage` section.
 
 ## Installation
 
-potage requires Python 3.7 or later.
-
-To install `potage`, execute the below commands.
+potage requires Python 3.7 or later and GNU Make.
 
 ```
 $ git clone git@github.com:iizukak/potage.git
 $ cd potage
-$ pip3 install -e .
-```
-
-If you want to debug potage, Please execute
-
-```
-$ pip3 install -e ".[dev]"
+$ make install
 ```
 
 ## Usage
 
 ### Command
 
-To show help message, please execute
+Show help message.
 
 ```
 $ potage help
 ```
 
-To convert .md to .html, type `potage` without argument.
+Convert `.md` files into `.html` files.
 
 ```
 $ potage
+```
+
+## Development
+
+To develop or debug potage, You need additional Python libraries.
+
+```
+$ make devinstall
+```
+
+Unit testing.
+
+```
+$ make test
+```
+
+Run the demo site on the local server.
+
+```
+$ make demo
 ```
 
 ### Configuration
 
 You should write some settings in `potage.yaml`.Please check this repository's root directory.
 
-### Unit Test
-
-```
-$ pytest .
-```
-
 ## Documentation Guide
 
-- `index.md` is required.
 - Converted `index.html` includes the automatically generated table of contents.
 - Each MarkDown file's first `#` in will be the page title.
-- potage copy `static` directory to the output directory.
+- potage copies `static` directory to the output directory.
 
 ## FAQ
 
 - Which CSS framework potage use?
   - [MVP.css](https://github.com/andybrewer/mvp/).
-- Can I change CSS style?
-  - Currently NO. If you have request, please write an [issue](https://github.com/iizukak/potage/issues).
+- Can I change the CSS style?
+  - Currently NO. If you have a request, please write an [issue](https://github.com/iizukak/potage/issues).
 
 ## License
 
