@@ -8,5 +8,4 @@ devinstall:
 
 .PHONY: server
 server:
-	cd potage/template
-	python3 -m http.server
+	cd potage/template && python3 -m http.server
