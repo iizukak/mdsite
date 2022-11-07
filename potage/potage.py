@@ -1,17 +1,18 @@
 import argparse
 import os
 import dataclasses
-from pathlib import Path, PurePath
+from pathlib import Path
+from re import template
 from site import execsitecustomize
+from jinja2 import Template
 import yaml
 import importlib
 from importlib.metadata import version
 import importlib.resources
 import pprint
+from markdown import Markdown, markdown
 
 CONFIG_FILE_NAME = "potage.yaml"
-INDEX_HTML_FILE_NAME = "index.html"
-PAGE_HTML_FILE_NAME = "page.html"
 
 
 @dataclasses.dataclass
@@ -63,7 +64,7 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
     # Load .md files in input_dir, recursively.
     # Retuen a list of MarkDown instances.
     print("collecting target markdown files...")
-    markdowns = []
+    markdown_files = []
     input_paths = Path(config["input_dir"]).glob("**/*.md")
     for path in input_paths:
         print(path)
@@ -73,7 +74,7 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
         stat = os.stat(path)
         with open(path) as f:
             contents = f.read()
-        markdown = MarkDownFile(
+        markdown_file = MarkDownFile(
             path=path,
             output_path=output_path,
             output_dir=output_dir,
@@ -81,26 +82,47 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
             edited_at=stat.st_mtime,
             contents=contents,
         )
-        markdowns.append(markdown)
+        markdown_files.append(markdown_file)
     print()
-    return markdowns
+    return markdown_files
 
 
-def make_output_dirs(markdowns: list[MarkDownFile]):
-    # mkdir recursively
-    # input: in/foo/bar -> mkdir: out/foo/bar
-    for markdown in markdowns:
-        os.makedirs(markdown.output_dir, exist_ok=True)
+def make_output_dirs(markdown_files: list[MarkDownFile]):
+    # Make output directories recursively
+    for markdown_file in markdown_files:
+        os.makedirs(markdown_file.output_dir, exist_ok=True)
 
 
-def convert_index(markdown):
-    # Convert index.md's MarkDown instance to index.html.
+def make_time_str(timestamp: str):
     pass
 
 
-def convert_page(markdown):
+def convert_index(markdown_file: MarkDownFile, config: dict, template: str):
+    # Convert index.md's MarkDown instance to index.html.
+    markdown_html = markdown(markdown_file.contents)
+    template = Template(source=template)
+    converted_html = template.render(contents=markdown_html, config=config)
+    with open(markdown_file.output_path, "w") as f:
+        f.write(converted_html)
+    print(converted_html)
+
+
+def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert a MarkDown instance into page.html
     pass
+
+
+def convert(
+    markdown_files: list[MarkDownFile], config: dict, templates: tuple[str, str]
+):
+    for markdown_file in markdown_files:
+        print(markdown_file.path)
+        if markdown_file.path == Path(config["input_dir"], "index.md"):
+            print("This is the index file")
+            convert_index(markdown_file, config, templates[0])
+        else:
+            print("This is not index file")
+            convert_page(markdown_file, config, templates[1])
 
 
 def main():
@@ -112,3 +134,4 @@ def main():
         index_template, page_template = load_template()
         markdown_files = load_markdown_files(config)
         make_output_dirs(markdown_files)
+        convert(markdown_files, config, (index_template, page_template))
