@@ -2,17 +2,17 @@ import argparse
 import os
 import dataclasses
 from pathlib import Path
-from re import template
-from site import execsitecustomize
 from jinja2 import Template
 import yaml
 import importlib
 from importlib.metadata import version
 import importlib.resources
 import pprint
-from markdown import Markdown, markdown
+from markdown import markdown
+from datetime import date
 
 CONFIG_FILE_NAME = "potage.yaml"
+CSS_FILE_NAME = "potage.css"
 
 
 @dataclasses.dataclass
@@ -48,16 +48,18 @@ def parse_config() -> dict:
     return config
 
 
-def load_template() -> tuple[str, str]:
+def load_template() -> tuple[str, str, str]:
     # Load jinja2 template files.
     # index.html is a main page template of the site.
     # pages.html is a general page template.
     pkg = importlib.resources.files("potage")
     index_template_path = pkg / "template" / "index.html"
     page_template_path = pkg / "template" / "pages.html"
+    css_path = pkg / "template" / CSS_FILE_NAME
     index_template = index_template_path.read_text()
     page_template = page_template_path.read_text()
-    return index_template, page_template
+    css = css_path.read_text()
+    return index_template, page_template, css
 
 
 def load_markdown_files(config: dict) -> list[MarkDownFile]:
@@ -93,18 +95,28 @@ def make_output_dirs(markdown_files: list[MarkDownFile]):
         os.makedirs(markdown_file.output_dir, exist_ok=True)
 
 
-def make_time_str(timestamp: str):
-    pass
+def make_time_str(timestamp: str, config: dict) -> str:
+    d = date.fromtimestamp(int(timestamp))
+    return d.strftime(config["date_format"])
 
 
 def convert_index(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert index.md's MarkDown instance to index.html.
     markdown_html = markdown(markdown_file.contents)
+    created_at = make_time_str(markdown_file.created_at, config)
+    updated_at = make_time_str(markdown_file.edited_at, config)
+    year = date.today().year
     template = Template(source=template)
-    converted_html = template.render(contents=markdown_html, config=config)
+    converted_html = template.render(
+        contents=markdown_html,
+        config=config,
+        created_at=created_at,
+        updated_at=updated_at,
+        year=year,
+    )
+    print(converted_html)
     with open(markdown_file.output_path, "w") as f:
         f.write(converted_html)
-    print(converted_html)
 
 
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
@@ -125,13 +137,20 @@ def convert(
             convert_page(markdown_file, config, templates[1])
 
 
+def write_css(css: str, config: dict):
+    output_path = Path(config["output_dir"]) / CSS_FILE_NAME
+    with open(output_path, "w") as f:
+        f.write(css)
+
+
 def main():
     args = parse_command_line_args()
     if args.version == True:
         print_version()
     else:
         config = parse_config()
-        index_template, page_template = load_template()
+        index_template, page_template, css = load_template()
         markdown_files = load_markdown_files(config)
         make_output_dirs(markdown_files)
         convert(markdown_files, config, (index_template, page_template))
+        write_css(css, config)
