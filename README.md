@@ -1,5 +1,7 @@
 # potage
 
+[![example workflow](https://github.com/iizukak/potage/actions/workflows/test.yaml/badge.svg)](https://github.com/iizukak/potage/actions/workflows/test.yaml)
+
 Minimal Static Site Generator.
 
 The demo site is [here](https://iizukak.github.io/potage/).
