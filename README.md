@@ -89,9 +89,7 @@ You should write some settings in `potage.yaml`.Please check this repository's r
 ## FAQ
 
 - Which CSS framework potage use?
-  - [MVP.css](https://github.com/andybrewer/mvp/).
-- Can I change the CSS style?
-  - Currently NO. If you have a request, please write an [issue](https://github.com/iizukak/potage/issues).
+    - [MVP.css](https://github.com/andybrewer/mvp/).
 
 ## License
 
