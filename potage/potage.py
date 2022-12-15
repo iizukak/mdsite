@@ -8,6 +8,7 @@ import shutil
 from datetime import date
 from importlib.metadata import version
 from pathlib import Path
+from tkinter import W
 
 import yaml
 from jinja2 import Template
@@ -190,14 +191,18 @@ def write_static(config: dict):
 
 
 def main():
+    config = parse_config()
+    index_template, page_template, css = load_template()
+    markdown_files = load_markdown_files(config)
+    make_output_dirs(markdown_files)
+    convert(markdown_files, config, (index_template, page_template))
+    write_css(css, config)
+    write_static(config)
+
+
+def entrypoint():
     args = parse_command_line_args()
     if args.version == True:
         print_version()
     else:
-        config = parse_config()
-        index_template, page_template, css = load_template()
-        markdown_files = load_markdown_files(config)
-        make_output_dirs(markdown_files)
-        convert(markdown_files, config, (index_template, page_template))
-        write_css(css, config)
-        write_static(config)
+        main()
