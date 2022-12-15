@@ -9,3 +9,7 @@ devinstall:
 .PHONY: server
 server:
 	cd out && python3 -m http.server
+
+.PHONY: test
+test:
+	pytest -s tests
