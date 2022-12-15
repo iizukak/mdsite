@@ -2,5 +2,8 @@ title: Taro Yamada's Home Page
 author: Taro Yamada
 input_dir: in
 output_dir: out
+# If your site is hosted on example.com/foo/bar/, please specify /foo/bar/ in site_root_dir.
+# When your site is hosted on Github Pages, you may need to specify repository name.
+site_root_dir: /
 date_format: "%Y/%m/%d"
 lang: en

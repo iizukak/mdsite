@@ -2,5 +2,6 @@ title: potage
 author: IIZUKA Kentaro
 input_dir: in
 output_dir: docs
+site_root_dir: /potage/
 date_format: "%Y/%m/%d"
 lang: en

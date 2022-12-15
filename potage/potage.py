@@ -10,6 +10,7 @@ from datetime import date
 from importlib.metadata import version
 from pathlib import Path
 from tkinter import W
+from platformdirs import site_config_dir
 
 import yaml
 from jinja2 import Template
@@ -81,7 +82,14 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
         output_html_file_name = path.stem + ".html"
         output_path = Path(output_dir, output_html_file_name)
         stat = os.stat(path)
-        link = "/".join(path.parts[1:-1]) + "/" + output_html_file_name
+        site_root_dir = config["site_root_dir"]
+        if len(path.parts[1:-1]) > 0:
+            link = (
+                site_root_dir + "/".join(path.parts[1:-1]) + "/" + output_html_file_name
+            )
+        else:
+            link = site_root_dir + output_html_file_name
+
         category = "/".join(path.parts[1:-1])
 
         # Read All Documents
