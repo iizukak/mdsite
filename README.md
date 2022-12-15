@@ -29,11 +29,11 @@ out/static/image.jpeg
 ```
 
 In the current directory, you should have `potage.yaml` configuration file.
-Please check `Usage` section.
+Please check the [example config file](https://github.com/iizukak/potage/blob/main/potage.yaml).
 
 ## Installation
 
-potage requires Python 3.7 or later and GNU Make.
+potage requires Python 3.8 or later and GNU Make.
 
 ```
 $ git clone git@github.com:iizukak/potage.git
@@ -76,10 +76,6 @@ Run the demo site on the local server.
 ```
 $ make demo
 ```
-
-### Configuration
-
-You should write some settings in `potage.yaml`.Please check this repository's root directory.
 
 ## Documentation Guide
 
