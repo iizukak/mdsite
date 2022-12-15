@@ -132,7 +132,7 @@ def convert_index(
     markdown_files: list[MarkDownFile],
 ):
     # Convert index.md's MarkDown instance to index.html.
-    markdown_html = markdown(markdown_file.contents)
+    markdown_html = markdown(markdown_file.contents, extensions=['fenced_code'])
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
@@ -151,7 +151,7 @@ def convert_index(
 
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert a MarkDown instance into .html.
-    markdown_html = markdown(markdown_file.contents)
+    markdown_html = markdown(markdown_file.contents, extensions=['fenced_code'])
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year

@@ -14,7 +14,7 @@ test:
 docs: install
 	cp ./README.md demo/in/index.md
 	cd ./demo && potage
-	cp -r ./demo/docs ./docs
+	cp -r ./demo/docs ./
 
 .PHONY: demo
 demo: docs

@@ -17,34 +17,42 @@
 <h2>What potage do</h2>
 <p>potage converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
 <p>For example, if you have these files,</p>
-<p><code>in/index.md
+<pre><code>in/index.md
 in/foo/bar.md
 in/static/image.jpeg
-potage.yaml # Configulation files</code></p>
+potage.yaml # Configulation files
+</code></pre>
 <p>by executing <code>potage</code> command, you will get these outputs.</p>
-<p><code>out/index.html
+<pre><code>out/index.html
 out/foo/bar.html
-out/static/image.jpeg</code></p>
+out/static/image.jpeg
+</code></pre>
 <p>In the current directory, you should have <code>potage.yaml</code> configuration file.
 Please check <code>Usage</code> section.</p>
 <h2>Installation</h2>
 <p>potage requires Python 3.7 or later and GNU Make.</p>
-<p><code>$ git clone git@github.com:iizukak/potage.git
+<pre><code>$ git clone git@github.com:iizukak/potage.git
 $ cd potage
-$ make install</code></p>
+$ make install
+</code></pre>
 <h2>Usage</h2>
 <h3>Command</h3>
 <p>Show help message.</p>
-<p><code>$ potage help</code></p>
+<pre><code>$ potage help
+</code></pre>
 <p>Convert <code>.md</code> files into <code>.html</code> files.</p>
-<p><code>$ potage</code></p>
+<pre><code>$ potage
+</code></pre>
 <h2>Development</h2>
 <p>To develop or debug potage, You need additional Python libraries.</p>
-<p><code>$ make devinstall</code></p>
+<pre><code>$ make devinstall
+</code></pre>
 <p>Unit testing.</p>
-<p><code>$ make test</code></p>
+<pre><code>$ make test
+</code></pre>
 <p>Run the demo site on the local server.</p>
-<p><code>$ make demo</code></p>
+<pre><code>$ make demo
+</code></pre>
 <h3>Configuration</h3>
 <p>You should write some settings in <code>potage.yaml</code>.Please check this repository's root directory.</p>
 <h2>Documentation Guide</h2>
