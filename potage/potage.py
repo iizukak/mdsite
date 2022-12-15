@@ -1,15 +1,17 @@
 import argparse
-import os
 import dataclasses
-from pathlib import Path
-from jinja2 import Template
-import yaml
 import importlib
-from importlib.metadata import version
 import importlib.resources
+import os
 import pprint
-from markdown import markdown
+import shutil
 from datetime import date
+from importlib.metadata import version
+from pathlib import Path
+
+import yaml
+from jinja2 import Template
+from markdown import markdown
 
 CONFIG_FILE_NAME = "potage.yaml"
 CSS_FILE_NAME = "potage.css"
@@ -91,7 +93,6 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
             for line in lines:
                 if len(line) <= 1:
                     continue
-                print(line[0:2])
                 if line[0:2] == "# ":
                     title = line[2:]
                     break
@@ -169,12 +170,9 @@ def convert(
     markdown_files: list[MarkDownFile], config: dict, templates: tuple[str, str]
 ):
     for markdown_file in markdown_files:
-        print(markdown_file.path)
         if markdown_file.path == Path(config["input_dir"], "index.md"):
-            print("This is the index file")
             convert_index(markdown_file, config, templates[0], markdown_files)
         else:
-            print("This is not index file")
             convert_page(markdown_file, config, templates[1])
 
 
@@ -182,6 +180,13 @@ def write_css(css: str, config: dict):
     output_path = Path(config["output_dir"]) / CSS_FILE_NAME
     with open(output_path, "w") as f:
         f.write(css)
+
+
+def write_static(config: dict):
+    input_static_dir = Path(config["input_dir"], "static")
+    output_dir = Path(config["output_dir"], "static")
+    if os.path.exists(input_static_dir):
+        shutil.copytree(input_static_dir, output_dir, dirs_exist_ok=True)
 
 
 def main():
@@ -195,3 +200,4 @@ def main():
         make_output_dirs(markdown_files)
         convert(markdown_files, config, (index_template, page_template))
         write_css(css, config)
+        write_static(config)
