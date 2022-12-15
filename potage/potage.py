@@ -5,6 +5,7 @@ import importlib.resources
 import os
 import pprint
 import shutil
+import platform
 from datetime import date
 from importlib.metadata import version
 from pathlib import Path
@@ -98,11 +99,16 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
                     title = line[2:]
                     break
 
+        if platform.platform().find("macOS") != -1:
+            created_at = stat.st_birthtime
+        else:
+            created_at = stat.st_ctime
+
         markdown_file = MarkDownFile(
             path=path,
             output_path=output_path,
             output_dir=output_dir,
-            created_at=stat.st_birthtime,
+            created_at=created_at,
             edited_at=stat.st_mtime,
             contents=contents,
             title=title,
@@ -132,7 +138,7 @@ def convert_index(
     markdown_files: list[MarkDownFile],
 ):
     # Convert index.md's MarkDown instance to index.html.
-    markdown_html = markdown(markdown_file.contents, extensions=['fenced_code'])
+    markdown_html = markdown(markdown_file.contents, extensions=["fenced_code"])
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
@@ -151,7 +157,7 @@ def convert_index(
 
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert a MarkDown instance into .html.
-    markdown_html = markdown(markdown_file.contents, extensions=['fenced_code'])
+    markdown_html = markdown(markdown_file.contents, extensions=["fenced_code"])
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
