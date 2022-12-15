@@ -6,10 +6,16 @@ install:
 devinstall:
 	pip3 install -e ".[dev]"
 
-.PHONY: server
-server:
-	cd out && python3 -m http.server
-
 .PHONY: test
 test:
 	pytest -s tests
+
+.PHONY: docs
+docs: install
+	cp ./README.md demo/in/index.md
+	cd ./demo && potage
+	cp -r ./demo/docs ./docs
+
+.PHONY: demo
+demo: docs
+	cd docs && python3 -m http.server

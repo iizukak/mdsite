@@ -128,3 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 tests/out
+demo/out
+demo/docs
+demo/in/index.md

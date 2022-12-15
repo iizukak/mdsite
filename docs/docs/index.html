@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>potage</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+    <link rel="stylesheet" href="/potage.css">
+  </head>
+  <body>
+    <header>
+      <a href="/index.html">potage</a>
+    </header>
+    <h1>potage</h1>
+<p>Minimal Static Site Generator.</p>
+<p>The demo site is <a href="">here</a>.</p>
+<h2>What potage do</h2>
+<p>potage converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
+<p>For example, if you have these files,</p>
+<p><code>in/index.md
+in/foo/bar.md
+in/static/image.jpeg
+potage.yaml # Configulation files</code></p>
+<p>by executing <code>potage</code> command, you will get these outputs.</p>
+<p><code>out/index.html
+out/foo/bar.html
+out/static/image.jpeg</code></p>
+<p>In the current directory, you should have <code>potage.yaml</code> configuration file.
+Please check <code>Usage</code> section.</p>
+<h2>Installation</h2>
+<p>potage requires Python 3.7 or later and GNU Make.</p>
+<p><code>$ git clone git@github.com:iizukak/potage.git
+$ cd potage
+$ make install</code></p>
+<h2>Usage</h2>
+<h3>Command</h3>
+<p>Show help message.</p>
+<p><code>$ potage help</code></p>
+<p>Convert <code>.md</code> files into <code>.html</code> files.</p>
+<p><code>$ potage</code></p>
+<h2>Development</h2>
+<p>To develop or debug potage, You need additional Python libraries.</p>
+<p><code>$ make devinstall</code></p>
+<p>Unit testing.</p>
+<p><code>$ make test</code></p>
+<p>Run the demo site on the local server.</p>
+<p><code>$ make demo</code></p>
+<h3>Configuration</h3>
+<p>You should write some settings in <code>potage.yaml</code>.Please check this repository's root directory.</p>
+<h2>Documentation Guide</h2>
+<ul>
+<li>Converted <code>index.html</code> includes the automatically generated table of contents.</li>
+<li>Each MarkDown file's first <code>#</code> in will be the page title. We need at least one <code>#</code> in a doc.</li>
+<li>potage copies <code>static</code> directory to the output directory.</li>
+</ul>
+<h2>FAQ</h2>
+<ul>
+<li>Which CSS framework potage use?</li>
+<li><a href="https://github.com/andybrewer/mvp/">MVP.css</a>.</li>
+<li>Can I change the CSS style?</li>
+<li>Currently NO. If you have a request, please write an <a href="https://github.com/iizukak/potage/issues">issue</a>.</li>
+</ul>
+<h2>License</h2>
+<p><a href="https://spdx.org/licenses/Apache-2.0.html">Apache License 2.0</a></p>
+
+    <h2>Table of contents</h2>
+    <ul>
+    
+    
+      
+      <li><a href="/index.html">potage
+</a></li>
+    
+    </ul>
+
+    <footer>
+      <p>created at: 2022/12/15, updated at: 2022/12/15</p>
+      <p>IIZUKA Kentaro © 2022</p>
+    </footer>
+  </body>
+</html>
