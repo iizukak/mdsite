@@ -23,6 +23,9 @@ class MarkDownFile:
     created_at: str
     edited_at: str
     contents: str
+    title: str
+    link: str
+    category: str
 
 
 def parse_command_line_args() -> argparse.Namespace:
@@ -74,8 +77,25 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
         output_html_file_name = path.stem + ".html"
         output_path = Path(output_dir, output_html_file_name)
         stat = os.stat(path)
+        link = "/".join(path.parts[1:-1]) + "/" + output_html_file_name
+        category = "/".join(path.parts[1:-1])
+
+        # Read All Documents
         with open(path) as f:
             contents = f.read()
+
+        # Parse Title
+        title = ""
+        with open(path) as f:
+            lines = f.readlines()
+            for line in lines:
+                if len(line) <= 1:
+                    continue
+                print(line[0:2])
+                if line[0:2] == "# ":
+                    title = line[2:]
+                    break
+
         markdown_file = MarkDownFile(
             path=path,
             output_path=output_path,
@@ -83,6 +103,9 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
             created_at=stat.st_birthtime,
             edited_at=stat.st_mtime,
             contents=contents,
+            title=title,
+            link=link,
+            category=category,
         )
         markdown_files.append(markdown_file)
     print()
@@ -100,7 +123,12 @@ def make_time_str(timestamp: str, config: dict) -> str:
     return d.strftime(config["date_format"])
 
 
-def convert_index(markdown_file: MarkDownFile, config: dict, template: str):
+def convert_index(
+    markdown_file: MarkDownFile,
+    config: dict,
+    template: str,
+    markdown_files: list[MarkDownFile],
+):
     # Convert index.md's MarkDown instance to index.html.
     markdown_html = markdown(markdown_file.contents)
     created_at = make_time_str(markdown_file.created_at, config)
@@ -113,15 +141,28 @@ def convert_index(markdown_file: MarkDownFile, config: dict, template: str):
         created_at=created_at,
         updated_at=updated_at,
         year=year,
+        markdowns=markdown_files,
     )
-    print(converted_html)
     with open(markdown_file.output_path, "w") as f:
         f.write(converted_html)
 
 
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
-    # Convert a MarkDown instance into page.html
-    pass
+    # Convert a MarkDown instance into .html.
+    markdown_html = markdown(markdown_file.contents)
+    created_at = make_time_str(markdown_file.created_at, config)
+    updated_at = make_time_str(markdown_file.edited_at, config)
+    year = date.today().year
+    template = Template(source=template)
+    converted_html = template.render(
+        contents=markdown_html,
+        config=config,
+        created_at=created_at,
+        updated_at=updated_at,
+        year=year,
+    )
+    with open(markdown_file.output_path, "w") as f:
+        f.write(converted_html)
 
 
 def convert(
@@ -131,7 +172,7 @@ def convert(
         print(markdown_file.path)
         if markdown_file.path == Path(config["input_dir"], "index.md"):
             print("This is the index file")
-            convert_index(markdown_file, config, templates[0])
+            convert_index(markdown_file, config, templates[0], markdown_files)
         else:
             print("This is not index file")
             convert_page(markdown_file, config, templates[1])

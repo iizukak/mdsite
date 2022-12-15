@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{config.lang}}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{config.title}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+    <link rel="stylesheet" href="/potage.css">
+  </head>
+  <body>
+    <header>
+      <a href="/index.html">{{config.title}}</a>
+    </header>
+   {{contents}}
+    <footer>
+      <p>created at: {{created_at}}, updated at: {{updated_at}}</p>
+      <p>{{config.author}} © {{year}}</p>
+    </footer>
+  </body>
+</html>

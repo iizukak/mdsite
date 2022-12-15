@@ -2,5 +2,5 @@ title: Taro Yamada's Home Page
 author: Taro Yamada
 input_dir: in
 output_dir: out
-date_format: YYYYMMDD
+date_format: "%Y/%m/%d"
 lang: en

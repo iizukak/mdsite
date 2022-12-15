@@ -11,7 +11,22 @@
     <header>
       <a href="/index.html">{{config.title}}</a>
     </header>
-   {{contents}}
+    {{contents}}
+
+    <h2>Table of contents</h2>
+    <ul>
+    {% set category = "" %}
+    {% for markdown in markdowns %}
+      {% if category != markdown.category %}
+        {% set category = markdown.category %}
+      </ul>
+      <h3>{{markdown.category}}</h3>
+      <ul>
+      {% endif %}
+      <li><a href="{{markdown.link}}">{{markdown.title}}</a></li>
+    {% endfor %}
+    </ul>
+
     <footer>
       <p>created at: {{created_at}}, updated at: {{updated_at}}</p>
       <p>{{config.author}} © {{year}}</p>
