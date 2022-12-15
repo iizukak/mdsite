@@ -2,7 +2,7 @@
 
 Minimal Static Site Generator.
 
-The demo site is [here]().
+The demo site is [here](https://iizukak.github.io/potage/).
 
 ## What potage do
 
