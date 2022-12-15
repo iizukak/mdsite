@@ -4,7 +4,8 @@
 
 Minimal Static Site Generator.
 
-The demo site is [here](https://iizukak.github.io/potage/).
+[demo](https://iizukak.github.io/potage/),
+[repository](https://github.com/iizukak/potage).
 
 ## What potage do
 
