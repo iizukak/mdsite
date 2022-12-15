@@ -7,7 +7,7 @@ devinstall:
 	pip3 install -e ".[dev]"
 
 .PHONY: test
-test:
+test: devinstall
 	pytest -s tests
 
 .PHONY: docs
