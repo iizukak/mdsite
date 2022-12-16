@@ -6,6 +6,7 @@ body {
 
 header {
     text-align: left;
+    padding: 1rem 1rem;
 }
 
 pre code {
