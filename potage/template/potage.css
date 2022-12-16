@@ -7,3 +7,7 @@ body {
 header {
     text-align: left;
 }
+
+pre code {
+    padding: 0.5rem 0.5rem;
+}
