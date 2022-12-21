@@ -16,8 +16,8 @@ import yaml
 from jinja2 import Template
 from markdown import markdown
 
-CONFIG_FILE_NAME = "potage.yaml"
-CSS_FILE_NAME = "potage.css"
+CONFIG_FILE_NAME = "mdsite.yaml"
+CSS_FILE_NAME = "mdsite.css"
 
 
 @dataclasses.dataclass
@@ -35,16 +35,16 @@ class MarkDownFile:
 
 def parse_command_line_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="potage: Minimal Static Site Generator."
+        description="mdsite: Minimal Static Site Generator."
     )
-    parser.add_argument("--version", action="store_true", help="Show potage version.")
+    parser.add_argument("--version", action="store_true", help="Show mdsite version.")
     args = parser.parse_args()
     return args
 
 
 def print_version():
-    v = version("potage")
-    print("potage version: " + v)
+    v = version("mdsite")
+    print("mdsite version: " + v)
 
 
 def parse_config() -> dict:
@@ -60,7 +60,7 @@ def load_template() -> tuple[str, str, str]:
     # Load jinja2 template files.
     # index.html is a main page template of the site.
     # pages.html is a general page template.
-    pkg = importlib.resources.files("potage")
+    pkg = importlib.resources.files("mdsite")
     index_template_path = pkg / "template" / "index.html"
     page_template_path = pkg / "template" / "pages.html"
     css_path = pkg / "template" / CSS_FILE_NAME

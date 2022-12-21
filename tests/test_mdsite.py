@@ -1,14 +1,14 @@
-from potage import potage
+from mdsite import mdsite
 import os
 import shutil
 
 
 def test_main_with_no_output():
     shutil.rmtree("out", ignore_errors=True)
-    shutil.copy("potage.yaml", "tests/potage.yaml")
+    shutil.copy("mdsite.yaml", "tests/mdsite.yaml")
     os.chdir("tests")
-    potage.main()
+    mdsite.main()
 
 
 def test_main_2nd():
-    potage.main()
+    mdsite.main()

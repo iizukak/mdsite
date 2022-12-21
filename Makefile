@@ -13,7 +13,7 @@ test: devinstall
 .PHONY: docs
 docs: install
 	cp ./README.md demo/in/index.md
-	cd ./demo && potage
+	cd ./demo && mdsite
 	cp -r ./demo/docs ./
 
 .PHONY: demo

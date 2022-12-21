@@ -11,42 +11,42 @@
     <header>
       <a href="/potage/index.html">The demo site of potage</a>
     </header>
-    <h1>potage</h1>
-<p><a href="https://github.com/iizukak/potage/actions/workflows/test.yaml"><img alt="example workflow" src="https://github.com/iizukak/potage/actions/workflows/test.yaml/badge.svg" /></a></p>
+    <h1>mdsite</h1>
+<p><a href="https://github.com/iizukak/mdsite/actions/workflows/test.yaml"><img alt="example workflow" src="https://github.com/iizukak/mdsite/actions/workflows/test.yaml/badge.svg" /></a></p>
 <p>Minimal Static Site Generator.</p>
-<p><a href="https://iizukak.github.io/potage/">demo</a>,
-<a href="https://github.com/iizukak/potage">repository</a>.</p>
-<h2>What potage do</h2>
-<p>potage converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
+<p><a href="https://iizukak.github.io/mdsite/">demo</a>,
+<a href="https://github.com/iizukak/mdsite">repository</a>.</p>
+<h2>What mdsite do</h2>
+<p>mdsite converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
 <p>For example, if you have these files,</p>
 <pre><code>in/index.md
 in/foo/bar.md
 in/static/image.jpeg
-potage.yaml # Configulation files
+mdsite.yaml # Configulation files
 </code></pre>
-<p>by executing <code>potage</code> command, you will get these outputs.</p>
+<p>by executing <code>mdsite</code> command, you will get these outputs.</p>
 <pre><code>out/index.html
 out/foo/bar.html
 out/static/image.jpeg
 </code></pre>
-<p>In the current directory, you should have <code>potage.yaml</code> configuration file.
-Please check the <a href="https://github.com/iizukak/potage/blob/main/potage.yaml">example config file</a>.</p>
+<p>In the current directory, you should have <code>mdsite.yaml</code> configuration file.
+Please check the <a href="https://github.com/iizukak/mdsite/blob/main/mdsite.yaml">example config file</a>.</p>
 <h2>Installation</h2>
-<p>potage requires Python 3.8 or later and GNU Make.</p>
-<pre><code>$ git clone git@github.com:iizukak/potage.git
-$ cd potage
+<p>mdsite requires Python 3.8 or later and GNU Make.</p>
+<pre><code>$ git clone git@github.com:iizukak/mdsite.git
+$ cd mdsite
 $ make install
 </code></pre>
 <h2>Usage</h2>
 <h3>Command</h3>
 <p>Show help message.</p>
-<pre><code>$ potage help
+<pre><code>$ mdsite help
 </code></pre>
 <p>Convert <code>.md</code> files into <code>.html</code> files.</p>
-<pre><code>$ potage
+<pre><code>$ mdsite
 </code></pre>
 <h2>Development</h2>
-<p>To develop or debug potage, You need additional Python libraries.</p>
+<p>To develop or debug mdsite, You need additional Python libraries.</p>
 <pre><code>$ make devinstall
 </code></pre>
 <p>Unit testing.</p>
@@ -59,11 +59,11 @@ $ make install
 <ul>
 <li>Converted <code>index.html</code> includes the automatically generated table of contents.</li>
 <li>Each MarkDown file's first <code>#</code> in will be the page title. We need at least one <code>#</code> in a doc.</li>
-<li>potage copies <code>static</code> directory to the output directory.</li>
+<li>mdsite copies <code>static</code> directory to the output directory.</li>
 </ul>
 <h2>FAQ</h2>
 <ul>
-<li>Which CSS framework potage use?<ul>
+<li>Which CSS framework mdsite use?<ul>
 <li><a href="https://github.com/andybrewer/mvp/">MVP.css</a>.</li>
 </ul>
 </li>
@@ -76,13 +76,13 @@ $ make install
     
     
       
-      <li><a href="/potage/index.html">potage
+      <li><a href="/potage/index.html">mdsite
 </a></li>
     
     </ul>
 
     <footer>
-      <p>created at: 2022/12/15, updated at: 2022/12/16</p>
+      <p>created at: 2022/12/15, updated at: 2022/12/21</p>
       <p>IIZUKA Kentaro © 2022</p>
     </footer>
   </body>

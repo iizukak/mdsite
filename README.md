@@ -1,15 +1,15 @@
-# potage
+# mdsite
 
-[![example workflow](https://github.com/iizukak/potage/actions/workflows/test.yaml/badge.svg)](https://github.com/iizukak/potage/actions/workflows/test.yaml)
+[![example workflow](https://github.com/iizukak/mdsite/actions/workflows/test.yaml/badge.svg)](https://github.com/iizukak/mdsite/actions/workflows/test.yaml)
 
 Minimal Static Site Generator.
 
-[demo](https://iizukak.github.io/potage/),
-[repository](https://github.com/iizukak/potage).
+[demo](https://iizukak.github.io/mdsite/),
+[repository](https://github.com/iizukak/mdsite).
 
-## What potage do
+## What mdsite do
 
-potage converts `.md` files into `.html` files in the same directory structure.
+mdsite converts `.md` files into `.html` files in the same directory structure.
 
 For example, if you have these files,
 
@@ -17,10 +17,10 @@ For example, if you have these files,
 in/index.md
 in/foo/bar.md
 in/static/image.jpeg
-potage.yaml # Configulation files
+mdsite.yaml # Configulation files
 ```
 
-by executing `potage` command, you will get these outputs.
+by executing `mdsite` command, you will get these outputs.
 
 ```
 out/index.html
@@ -28,16 +28,16 @@ out/foo/bar.html
 out/static/image.jpeg
 ```
 
-In the current directory, you should have `potage.yaml` configuration file.
-Please check the [example config file](https://github.com/iizukak/potage/blob/main/potage.yaml).
+In the current directory, you should have `mdsite.yaml` configuration file.
+Please check the [example config file](https://github.com/iizukak/mdsite/blob/main/mdsite.yaml).
 
 ## Installation
 
-potage requires Python 3.8 or later and GNU Make.
+mdsite requires Python 3.8 or later and GNU Make.
 
 ```
-$ git clone git@github.com:iizukak/potage.git
-$ cd potage
+$ git clone git@github.com:iizukak/mdsite.git
+$ cd mdsite
 $ make install
 ```
 
@@ -48,18 +48,18 @@ $ make install
 Show help message.
 
 ```
-$ potage help
+$ mdsite help
 ```
 
 Convert `.md` files into `.html` files.
 
 ```
-$ potage
+$ mdsite
 ```
 
 ## Development
 
-To develop or debug potage, You need additional Python libraries.
+To develop or debug mdsite, You need additional Python libraries.
 
 ```
 $ make devinstall
@@ -81,11 +81,11 @@ $ make demo
 
 - Converted `index.html` includes the automatically generated table of contents.
 - Each MarkDown file's first `#` in will be the page title. We need at least one `#` in a doc.
-- potage copies `static` directory to the output directory.
+- mdsite copies `static` directory to the output directory.
 
 ## FAQ
 
-- Which CSS framework potage use?
+- Which CSS framework mdsite use?
     - [MVP.css](https://github.com/andybrewer/mvp/).
 
 ## License
