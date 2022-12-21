@@ -19,42 +19,50 @@
 <h2>What mdsite do</h2>
 <p>mdsite converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
 <p>For example, if you have these files,</p>
-<pre><code>in/index.md
+<div class="codehilite"><pre><span></span><code>in/index.md
 in/foo/bar.md
 in/static/image.jpeg
 mdsite.yaml # Configulation files
-</code></pre>
+</code></pre></div>
+
 <p>by executing <code>mdsite</code> command, you will get these outputs.</p>
-<pre><code>out/index.html
+<div class="codehilite"><pre><span></span><code>out/index.html
 out/foo/bar.html
 out/static/image.jpeg
-</code></pre>
+</code></pre></div>
+
 <p>In the current directory, you should have <code>mdsite.yaml</code> configuration file.
 Please check the <a href="https://github.com/iizukak/mdsite/blob/main/mdsite.yaml">example config file</a>.</p>
 <h2>Installation</h2>
 <p>mdsite requires Python 3.8 or later and GNU Make.</p>
-<pre><code>$ git clone git@github.com:iizukak/mdsite.git
-$ cd mdsite
+<div class="codehilite"><pre><span></span><code>$ git clone git@github.com:iizukak/mdsite.git
+$ <span class="nb">cd</span> mdsite
 $ make install
-</code></pre>
+</code></pre></div>
+
 <h2>Usage</h2>
 <h3>Command</h3>
 <p>Show help message.</p>
-<pre><code>$ mdsite help
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$ mdsite <span class="nb">help</span>
+</code></pre></div>
+
 <p>Convert <code>.md</code> files into <code>.html</code> files.</p>
-<pre><code>$ mdsite
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$ mdsite
+</code></pre></div>
+
 <h2>Development</h2>
 <p>To develop or debug mdsite, You need additional Python libraries.</p>
-<pre><code>$ make devinstall
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$ make devinstall
+</code></pre></div>
+
 <p>Unit testing.</p>
-<pre><code>$ make test
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$ make <span class="nb">test</span>
+</code></pre></div>
+
 <p>Run the demo site on the local server.</p>
-<pre><code>$ make demo
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$ make demo
+</code></pre></div>
+
 <h2>Documentation Guide</h2>
 <ul>
 <li>Converted <code>index.html</code> includes the automatically generated table of contents.</li>
