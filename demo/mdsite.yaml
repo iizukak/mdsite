@@ -1,7 +1,7 @@
-title: The demo site of potage
+title: The demo site of mdsite
 author: IIZUKA Kentaro
 input_dir: in
 output_dir: docs
-site_root_dir: /potage/
+site_root_dir: /mdsite/
 date_format: "%Y/%m/%d"
 lang: en

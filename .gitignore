@@ -131,4 +131,4 @@ tests/out
 demo/out
 demo/docs
 demo/in/index.md
-tests/potage.yaml
+tests/mdsite.yaml
