@@ -10,6 +10,10 @@ devinstall:
 test: devinstall
 	pytest -s tests
 
+.PHONY: testserver
+testserver: test
+	cd tests/out && python3 -m http.server
+
 .PHONY: docs
 docs: install
 	cp ./README.md demo/in/index.md
