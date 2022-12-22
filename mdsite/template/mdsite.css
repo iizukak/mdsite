@@ -9,6 +9,10 @@ header {
     padding: 1rem 1rem;
 }
 
+pre {
+    padding: 0;
+}
+
 pre code {
     padding: 0.5rem 0.5rem;
 }
