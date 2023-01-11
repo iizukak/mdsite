@@ -15,4 +15,6 @@ jobs:
           python-version: "3.10"
           
       - name: pytest
-        run: make test
+        run: |
+            make devinstall
+            make test
