@@ -7,7 +7,7 @@ devinstall:
 	pip3 install -e ".[dev]"
 
 .PHONY: test
-test: devinstall
+test:
 	pytest -s tests
 
 .PHONY: testserver
@@ -15,7 +15,7 @@ testserver: test
 	cd tests/out && python3 -m http.server
 
 .PHONY: docs
-docs: install
+docs:
 	cp ./README.md demo/in/index.md
 	cd ./demo && mdsite
 	cp -r ./demo/docs ./
