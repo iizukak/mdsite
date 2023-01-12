@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The demo site of mdsite</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
-    <link rel="stylesheet" href="https://iizukak.github.io/mdsite/mdsite.css">
+    <link rel="stylesheet" href="./mdsite.css">
   </head>
   <body>
     <header>
-      <a href="/mdsite/index.html">The demo site of mdsite</a>
+      <a href="./index.html">The demo site of mdsite</a>
     </header>
     <h1>mdsite</h1>
 <p><a href="https://github.com/iizukak/mdsite/actions/workflows/test.yaml"><img alt="example workflow" src="https://github.com/iizukak/mdsite/actions/workflows/test.yaml/badge.svg" /></a></p>
@@ -60,7 +60,7 @@ $ make install
 </code></pre></div>
 
 <p>Run the demo site on the local server.</p>
-<div class="codehilite"><pre><span></span><code>$ make demo
+<div class="codehilite"><pre><span></span><code>$ make demoserver
 </code></pre></div>
 
 <h2>Documentation Guide</h2>
@@ -68,6 +68,7 @@ $ make install
 <li>Converted <code>index.html</code> includes the automatically generated table of contents.</li>
 <li>Each MarkDown file's first <code>#</code> in will be the page title. We need at least one <code>#</code> in a doc.</li>
 <li>mdsite copies <code>static</code> directory to the output directory.</li>
+<li>Code Syntax Highlight is supported.</li>
 </ul>
 <h2>FAQ</h2>
 <ul>
@@ -84,13 +85,13 @@ $ make install
     
     
       
-      <li><a href="/mdsite/index.html">mdsite
+      <li><a href="index.html">mdsite
 </a></li>
     
     </ul>
 
     <footer>
-      <p>created at: 2022/12/22, updated at: 2023/01/11</p>
+      <p>created at: 2022/12/22, updated at: 2023/01/12</p>
       <p>IIZUKA Kentaro © 2023</p>
     </footer>
   </body>

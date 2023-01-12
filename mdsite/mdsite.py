@@ -30,6 +30,7 @@ class MarkDownFile:
     contents: str
     title: str
     link: str
+    link_to_root: str
     category: str
 
 
@@ -70,6 +71,16 @@ def load_template() -> tuple[str, str, str]:
     return index_template, page_template, css
 
 
+def calc_link_to_root(path: Path) -> str:
+    # Calculate relative path to the site root
+    # When path is "in/foo/bar.md", returns "../"
+    # When path is "in/index.md", return "./"
+    if len(path.parts) == 2:
+        return "./"
+    else:
+        return "../" * (len(path.parts) - 2)
+
+
 def load_markdown_files(config: dict) -> list[MarkDownFile]:
     # Load .md files in input_dir, recursively.
     # Retuen a list of MarkDown instances.
@@ -82,15 +93,13 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
         output_html_file_name = path.stem + ".html"
         output_path = Path(output_dir, output_html_file_name)
         stat = os.stat(path)
-        site_root_dir = config["site_root_dir"]
         if len(path.parts[1:-1]) > 0:
-            link = (
-                site_root_dir + "/".join(path.parts[1:-1]) + "/" + output_html_file_name
-            )
+            link = "./".join(path.parts[1:-1]) + "/" + output_html_file_name
         else:
-            link = site_root_dir + output_html_file_name
+            link = output_html_file_name
 
         category = "/".join(path.parts[1:-1])
+        link_to_root = calc_link_to_root(path)
 
         # Read All Documents
         with open(path) as f:
@@ -121,6 +130,7 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
             contents=contents,
             title=title,
             link=link,
+            link_to_root=link_to_root,
             category=category,
         )
         markdown_files.append(markdown_file)
@@ -146,7 +156,9 @@ def convert_index(
     markdown_files: list[MarkDownFile],
 ):
     # Convert index.md's MarkDown instance to index.html.
-    markdown_html = markdown(markdown_file.contents, extensions=["fenced_code", "codehilite"])
+    markdown_html = markdown(
+        markdown_file.contents, extensions=["fenced_code", "codehilite"]
+    )
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
@@ -165,7 +177,9 @@ def convert_index(
 
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert a MarkDown instance into .html.
-    markdown_html = markdown(markdown_file.contents, extensions=["fenced_code", "codehilite"])
+    markdown_html = markdown(
+        markdown_file.contents, extensions=["fenced_code", "codehilite"]
+    )
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
@@ -176,6 +190,7 @@ def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
         created_at=created_at,
         updated_at=updated_at,
         year=year,
+        markdown=markdown_file,
     )
     with open(markdown_file.output_path, "w") as f:
         f.write(converted_html)

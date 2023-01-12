@@ -74,7 +74,7 @@ $ make test
 Run the demo site on the local server.
 
 ```
-$ make demo
+$ make demoserver
 ```
 
 ## Documentation Guide
@@ -82,6 +82,7 @@ $ make demo
 - Converted `index.html` includes the automatically generated table of contents.
 - Each MarkDown file's first `#` in will be the page title. We need at least one `#` in a doc.
 - mdsite copies `static` directory to the output directory.
+- Code Syntax Highlight is supported.
 
 ## FAQ
 

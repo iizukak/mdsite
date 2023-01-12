@@ -14,12 +14,12 @@ test:
 testserver: test
 	cd tests/out && python3 -m http.server
 
-.PHONY: docs
-docs:
+.PHONY: demo
+demo:
 	cp ./README.md demo/in/index.md
 	cd ./demo && mdsite
 	cp -r ./demo/docs ./
 
-.PHONY: demo
-demo: docs
+.PHONY: demoserver
+demoserver: demo
 	cd docs && python3 -m http.server
