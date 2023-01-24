@@ -2,7 +2,7 @@
 
 [![example workflow](https://github.com/iizukak/mdsite/actions/workflows/test.yaml/badge.svg)](https://github.com/iizukak/mdsite/actions/workflows/test.yaml)
 
-Minimal Static Site Generator.
+mdsite is a command line tool that generates a static site from Markdown files.
 
 [demo](https://iizukak.github.io/mdsite/),
 [repository](https://github.com/iizukak/mdsite).
@@ -26,6 +26,7 @@ by executing `mdsite` command, you will get these outputs.
 out/index.html
 out/foo/bar.html
 out/static/image.jpeg
+out/mdsite.css
 ```
 
 In the current directory, you should have `mdsite.yaml` configuration file.
