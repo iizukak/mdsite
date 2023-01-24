@@ -16,9 +16,7 @@ testserver: test
 
 .PHONY: demo
 demo:
-	cp ./README.md demo/in/index.md
-	cd ./demo && mdsite
-	cp -r ./demo/docs ./
+	mdsite --config demo.yaml
 
 .PHONY: demoserver
 demoserver: demo

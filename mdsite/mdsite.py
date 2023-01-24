@@ -16,8 +16,7 @@ import yaml
 from jinja2 import Template
 from markdown import markdown
 
-CONFIG_FILE_NAME = "mdsite.yaml"
-CSS_FILE_NAME = "mdsite.css"
+css_file_name = "mdsite.css"
 
 
 @dataclasses.dataclass
@@ -39,6 +38,7 @@ def parse_command_line_args() -> argparse.Namespace:
         description="mdsite: Minimal Static Site Generator."
     )
     parser.add_argument("--version", action="store_true", help="Show mdsite version.")
+    parser.add_argument("--config", help="Specify YAML file.", default="mdsite.yaml")
     args = parser.parse_args()
     return args
 
@@ -48,8 +48,8 @@ def print_version():
     print("mdsite version: " + v)
 
 
-def parse_config() -> dict:
-    with open(CONFIG_FILE_NAME) as file:
+def parse_config(config_file_name: str) -> dict:
+    with open(config_file_name) as file:
         config = yaml.safe_load(file)
     print("load settings...")
     pprint.pprint(config)
@@ -64,7 +64,7 @@ def load_template() -> tuple[str, str, str]:
     pkg = importlib.resources.files("mdsite")
     index_template_path = pkg / "template" / "index.html"
     page_template_path = pkg / "template" / "pages.html"
-    css_path = pkg / "template" / CSS_FILE_NAME
+    css_path = pkg / "template" / css_file_name
     index_template = index_template_path.read_text()
     page_template = page_template_path.read_text()
     css = css_path.read_text()
@@ -81,6 +81,17 @@ def calc_link_to_root(path: Path) -> str:
         return "../" * (len(path.parts) - 2)
 
 
+def is_excluded(path: Path, config: dict) -> bool:
+    if "excludes" not in config.keys():
+        return False
+    for exclude in config["excludes"]:
+        print(path, exclude)
+        if path.match(exclude):
+            print(path, " is excluded")
+            return True
+    return False
+
+
 def load_markdown_files(config: dict) -> list[MarkDownFile]:
     # Load .md files in input_dir, recursively.
     # Retuen a list of MarkDown instances.
@@ -88,7 +99,9 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
     markdown_files = []
     input_paths = Path(config["input_dir"]).glob("**/*.md")
     for path in input_paths:
-        print(path)
+        print(path, " is detected")
+        if is_excluded(path, config):
+            continue
         output_dir = Path(config["output_dir"], *path.parts[1:-1])
         output_html_file_name = path.stem + ".html"
         output_path = Path(output_dir, output_html_file_name)
@@ -200,14 +213,14 @@ def convert(
     markdown_files: list[MarkDownFile], config: dict, templates: tuple[str, str]
 ):
     for markdown_file in markdown_files:
-        if markdown_file.path == Path(config["input_dir"], "index.md"):
+        if markdown_file.output_path == Path(config["output_dir"], "index.html"):
             convert_index(markdown_file, config, templates[0], markdown_files)
         else:
             convert_page(markdown_file, config, templates[1])
 
 
 def write_css(css: str, config: dict):
-    output_path = Path(config["output_dir"]) / CSS_FILE_NAME
+    output_path = Path(config["output_dir"]) / css_file_name
     with open(output_path, "w") as f:
         f.write(css)
 
@@ -219,8 +232,8 @@ def write_static(config: dict):
         shutil.copytree(input_static_dir, output_dir, dirs_exist_ok=True)
 
 
-def main():
-    config = parse_config()
+def main(config_file_name: str):
+    config = parse_config(config_file_name)
     index_template, page_template, css = load_template()
     markdown_files = load_markdown_files(config)
     make_output_dirs(markdown_files)
@@ -234,4 +247,4 @@ def entrypoint():
     if args.version == True:
         print_version()
     else:
-        main()
+        main(args.config)
