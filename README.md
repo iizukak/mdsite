@@ -114,7 +114,7 @@ For example, `$e^x$` is converted to $e^x$ .
 
 #### Standalone equation
 
-Using double `$`$` generates a standalone equation.
+Using double `$` generates a standalone equation.
 For example,
 
 ```tex
