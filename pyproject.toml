@@ -1,3 +1,36 @@
 [build-system]
-requires = ["wheel", "setuptools"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{ name = "Kentaro Iizuka", email = "iizuka.kentaro@gmail.com" }]
+name = "mdsite"
+version = "0.1.0"
+license = { file = "LICENSE" }
+description = "Minimal Static Site Generator."
+dependencies = [
+    "jinja2",
+    "markdown",
+    "pyyaml",
+    "pygments",
+    "python-markdown-math",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "isort"]
+
+[project.scripts]
+mdsite = "mdsite.mdsite:entrypoint"
+
+[project.urls]
+homepage = "https://iizukak.github.io/mdsite/"
+documentation = "https://github.com/iizukak/mdsite/blob/main/README.md"
+repository = "https://github.com/iizukak/mdsite"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+packages = ["mdsite"]
+
+[tool.setuptools.package-data]
+mdsite = ["template/*"]
