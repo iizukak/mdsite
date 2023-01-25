@@ -83,7 +83,55 @@ $ make demoserver
 - Converted `index.html` includes the automatically generated table of contents.
 - Each MarkDown file's first `#` in will be the page title. We need at least one `#` in a doc.
 - mdsite copies `static` directory to the output directory.
-- Code Syntax Highlight is supported.
+
+### Syntax highlighting
+
+Syntax highlighting is supported. Use triple `` ` `` to write the code.
+
+````
+```python
+def hello():
+    print("Hello, mdsite")
+```
+````
+
+is converted to
+
+```python
+def hello():
+    print("Hello, mdsite")
+```
+
+### MathJax Support
+
+Math equations are supported by [python-markdown-math](https://github.com/mitya57/python-markdown-math).
+
+#### Inline equation
+
+Using single `$` generate inline equation.
+For example, `$e^x$` is converted to $e^x$ .
+
+
+#### Standalone equation
+
+Using double `$`$` generates a standalone equation.
+For example,
+
+```tex
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } }
+$$
+```
+
+is converted to
+
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } }
+$$
 
 ## FAQ
 

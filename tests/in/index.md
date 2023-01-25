@@ -12,9 +12,40 @@ One night—it was on the twentieth of March, 1888—I was returning from a jour
 
 ## Syntax highlighting
 
-Syntax highlighting example
+Syntax highlighting is supported.
 
 ```python
 def hello():
     print("Hello, mdsite")
 ```
+
+## MathJax Support
+
+Math equation is supported by [python-markdown-math](https://github.com/mitya57/python-markdown-math).
+
+### Inline equation
+
+Using single `$` generate inline equation.
+For example, `$e^x$` is converted to $e^x$ .
+
+
+### Standalone equation
+
+Using double `$$` generate standalone equation.
+For example,
+
+```tex
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } }
+$$
+```
+
+is converted to
+
+$$
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } }
+$$

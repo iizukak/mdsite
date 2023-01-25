@@ -6,6 +6,19 @@
     <title>The demo site of mdsite</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
     <link rel="stylesheet" href="./mdsite.css">
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
   </head>
   <body>
     <header>
@@ -69,8 +82,43 @@ $ make install
 <li>Converted <code>index.html</code> includes the automatically generated table of contents.</li>
 <li>Each MarkDown file's first <code>#</code> in will be the page title. We need at least one <code>#</code> in a doc.</li>
 <li>mdsite copies <code>static</code> directory to the output directory.</li>
-<li>Code Syntax Highlight is supported.</li>
 </ul>
+<h3>Syntax highlighting</h3>
+<p>Syntax highlighting is supported. Use triple <code>`</code> to write the code.</p>
+<div class="codehilite"><pre><span></span><code>```python
+def hello():
+    print(&quot;Hello, mdsite&quot;)
+```
+</code></pre></div>
+
+<p>is converted to</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, mdsite&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>MathJax Support</h3>
+<p>Math equations are supported by <a href="https://github.com/mitya57/python-markdown-math">python-markdown-math</a>.</p>
+<h4>Inline equation</h4>
+<p>Using single <code>$</code> generate inline equation.
+For example, <code>$e^x$</code> is converted to $e^x$ .</p>
+<h4>Standalone equation</h4>
+<p>Using double <code>$</code>$` generates a standalone equation.
+For example,</p>
+<div class="codehilite"><pre><span></span><code><span class="sb">$$</span><span class="nb"></span>
+<span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="nv">\Bigl</span><span class="o">(</span><span class="nv">\sqrt</span><span class="nb">{</span><span class="nv">\phi</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{</span><span class="m">5</span><span class="nb">}}</span><span class="o">-</span><span class="nv">\phi\Bigr</span><span class="o">)</span><span class="nb"> e^{</span><span class="nv">\frac</span><span class="m">25</span><span class="nb"> </span><span class="nv">\pi</span><span class="nb">}} </span><span class="o">=</span><span class="nb"></span>
+<span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">2</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">4</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">6</span><span class="nv">\pi</span><span class="nb">}}</span>
+<span class="nb">{</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">8</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\ldots</span><span class="nb">} } } }</span>
+<span class="s">$$</span>
+</code></pre></div>
+
+<p>is converted to</p>
+<p>
+<script type="math/tex; mode=display">
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } }
+</script>
+</p>
 <h2>FAQ</h2>
 <ul>
 <li>Which CSS framework mdsite use?<ul>
@@ -92,7 +140,7 @@ $ make install
     </ul>
 
     <footer>
-      <p>created at: 2022/11/01, updated at: 2023/01/24</p>
+      <p>created at: 2022/11/01, updated at: 2023/01/25</p>
       <p>IIZUKA Kentaro © 2023</p>
     </footer>
   </body>
