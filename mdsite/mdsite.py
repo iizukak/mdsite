@@ -59,16 +59,12 @@ def parse_config(config_file_name: str) -> dict:
 
 def load_template() -> tuple[str, str, str]:
     # Load jinja2 template files.
-    # index.html is a main page template of the site.
-    # pages.html is a general page template.
     pkg = importlib.resources.files("mdsite")
-    index_template_path = pkg / "template" / "index.html"
-    page_template_path = pkg / "template" / "pages.html"
+    template_path = pkg / "template" / "template.html"
     css_path = pkg / "template" / css_file_name
-    index_template = index_template_path.read_text()
-    page_template = page_template_path.read_text()
+    template = template_path.read_text()
     css = css_path.read_text()
-    return index_template, page_template, css
+    return template, css
 
 
 def calc_link_to_root(path: Path) -> str:
@@ -162,32 +158,6 @@ def make_time_str(timestamp: str, config: dict) -> str:
     return d.strftime(config["date_format"])
 
 
-def convert_index(
-    markdown_file: MarkDownFile,
-    config: dict,
-    template: str,
-    markdown_files: list[MarkDownFile],
-):
-    # Convert index.md's MarkDown instance to index.html.
-    markdown_html = markdown(
-        markdown_file.contents, extensions=["fenced_code", "codehilite", "mdx_math"]
-    )
-    created_at = make_time_str(markdown_file.created_at, config)
-    updated_at = make_time_str(markdown_file.edited_at, config)
-    year = date.today().year
-    template = Template(source=template)
-    converted_html = template.render(
-        contents=markdown_html,
-        config=config,
-        created_at=created_at,
-        updated_at=updated_at,
-        year=year,
-        markdowns=markdown_files,
-    )
-    with open(markdown_file.output_path, "w") as f:
-        f.write(converted_html)
-
-
 def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     # Convert a MarkDown instance into .html.
     markdown_html = markdown(
@@ -209,14 +179,9 @@ def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
         f.write(converted_html)
 
 
-def convert(
-    markdown_files: list[MarkDownFile], config: dict, templates: tuple[str, str]
-):
+def convert(markdown_files: list[MarkDownFile], config: dict, templates: str):
     for markdown_file in markdown_files:
-        if markdown_file.output_path == Path(config["output_dir"], "index.html"):
-            convert_index(markdown_file, config, templates[0], markdown_files)
-        else:
-            convert_page(markdown_file, config, templates[1])
+        convert_page(markdown_file, config, templates)
 
 
 def write_css(css: str, config: dict):
@@ -234,10 +199,10 @@ def write_static(config: dict):
 
 def main(config_file_name: str):
     config = parse_config(config_file_name)
-    index_template, page_template, css = load_template()
+    template, css = load_template()
     markdown_files = load_markdown_files(config)
     make_output_dirs(markdown_files)
-    convert(markdown_files, config, (index_template, page_template))
+    convert(markdown_files, config, (template))
     write_css(css, config)
     write_static(config)
 

@@ -80,8 +80,6 @@ $ make demoserver
 
 ## Documentation Guide
 
-- Converted `index.html` includes the automatically generated table of contents.
-- Each MarkDown file's first `#` in will be the page title. We need at least one `#` in a doc.
 - mdsite copies `static` directory to the output directory.
 
 ### Syntax highlighting
