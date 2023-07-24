@@ -1,21 +1,3 @@
-body {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 10px;
-}
-
-header {
-    text-align: left;
-    padding: 1rem 1rem;
-}
-
-pre {
-    padding: 0;
-}
-
-pre code {
-    padding: 0.5rem 0.5rem;
-}
 
 /* DO NOT EDIT UNDER THIS LINE */
 /* Generated from pygments */
