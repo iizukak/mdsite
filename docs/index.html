@@ -49,32 +49,32 @@ out/mdsite.css
 Please check the <a href="https://github.com/iizukak/mdsite/blob/main/mdsite.yaml">example config file</a>.</p>
 <h2>Installation</h2>
 <p>mdsite requires Python 3.8 or later and GNU Make.</p>
-<div class="codehilite"><pre><span></span><code>$ git clone git@github.com:iizukak/mdsite.git
-$ <span class="nb">cd</span> mdsite
-$ make install
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:iizukak/mdsite.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>mdsite
+$<span class="w"> </span>make<span class="w"> </span>install
 </code></pre></div>
 
 <h2>Usage</h2>
 <h3>Command</h3>
 <p>Show help message.</p>
-<div class="codehilite"><pre><span></span><code>$ mdsite <span class="nb">help</span>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>mdsite<span class="w"> </span><span class="nb">help</span>
 </code></pre></div>
 
 <p>Convert <code>.md</code> files into <code>.html</code> files.</p>
-<div class="codehilite"><pre><span></span><code>$ mdsite
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>mdsite
 </code></pre></div>
 
 <h2>Development</h2>
 <p>To develop or debug mdsite, You need additional Python libraries.</p>
-<div class="codehilite"><pre><span></span><code>$ make devinstall
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>make<span class="w"> </span>devinstall
 </code></pre></div>
 
 <p>Unit testing.</p>
-<div class="codehilite"><pre><span></span><code>$ make <span class="nb">test</span>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 
 <p>Run the demo site on the local server.</p>
-<div class="codehilite"><pre><span></span><code>$ make demoserver
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>make<span class="w"> </span>demoserver
 </code></pre></div>
 
 <h2>Documentation Guide</h2>
@@ -102,8 +102,8 @@ For example, <code>$e^x$</code> is converted to $e^x$ .</p>
 <h4>Standalone equation</h4>
 <p>Using double <code>$</code> generates a standalone equation.
 For example,</p>
-<div class="codehilite"><pre><span></span><code><span class="sb">$$</span><span class="nb"></span>
-<span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="nv">\Bigl</span><span class="o">(</span><span class="nv">\sqrt</span><span class="nb">{</span><span class="nv">\phi</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{</span><span class="m">5</span><span class="nb">}}</span><span class="o">-</span><span class="nv">\phi\Bigr</span><span class="o">)</span><span class="nb"> e^{</span><span class="nv">\frac</span><span class="m">25</span><span class="nb"> </span><span class="nv">\pi</span><span class="nb">}} </span><span class="o">=</span><span class="nb"></span>
+<div class="codehilite"><pre><span></span><code><span class="sb">$$</span>
+<span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="nv">\Bigl</span><span class="o">(</span><span class="nv">\sqrt</span><span class="nb">{</span><span class="nv">\phi</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{</span><span class="m">5</span><span class="nb">}}</span><span class="o">-</span><span class="nv">\phi\Bigr</span><span class="o">)</span><span class="nb"> e^{</span><span class="nv">\frac</span><span class="m">25</span><span class="nb"> </span><span class="nv">\pi</span><span class="nb">}} </span><span class="o">=</span>
 <span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">2</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">4</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">6</span><span class="nv">\pi</span><span class="nb">}}</span>
 <span class="nb">{</span><span class="m">1</span><span class="o">+</span><span class="nv">\frac</span><span class="nb">{e^{</span><span class="o">-</span><span class="m">8</span><span class="nv">\pi</span><span class="nb">}} {</span><span class="m">1</span><span class="o">+</span><span class="nv">\ldots</span><span class="nb">} } } }</span>
 <span class="s">$$</span>
