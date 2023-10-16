@@ -27,6 +27,12 @@ homepage = "https://iizukak.github.io/mdsite/"
 documentation = "https://github.com/iizukak/mdsite/blob/main/README.md"
 repository = "https://github.com/iizukak/mdsite"
 
+[tool]
+rye = { dev-dependencies = [
+    "black>=23.9.1",
+    "pytest>=7.4.2",
+] }
+
 [tool.setuptools]
 zip-safe = false
 include-package-data = true

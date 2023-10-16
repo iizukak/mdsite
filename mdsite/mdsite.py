@@ -9,7 +9,6 @@ import platform
 from datetime import date
 from importlib.metadata import version
 from pathlib import Path
-from platformdirs import site_config_dir
 
 import yaml
 from jinja2 import Template
