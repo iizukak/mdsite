@@ -6,19 +6,33 @@
     <title>The demo site of mdsite</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="./mdsite.css">
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
+    <script>
+      window.MathJax = {
+        tex: {
           inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
           processEscapes: true
         },
-        "HTML-CSS": { fonts: ["TeX"] }
-      });
+        options: {
+          renderActions: {
+            // python-markdown-math が出力する MathJax 2 形式の
+            // <script type="math/tex"> を MathJax 4 の数式として登録する
+            findScript: [10, function (doc) {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+              }
+            }, '']
+          }
+        }
+      };
     </script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
   </head>
   <body>
     <header>
@@ -48,7 +62,7 @@ out/mdsite.css
 <p>In the current directory, you should have <code>mdsite.yaml</code> configuration file.
 Please check the <a href="https://github.com/iizukak/mdsite/blob/main/mdsite.yaml">example config file</a>.</p>
 <h2>Installation</h2>
-<p>mdsite requires Python 3.8 or later and GNU Make.</p>
+<p>mdsite requires Python 3.10 or later, <a href="https://docs.astral.sh/uv/">uv</a> and GNU Make.</p>
 <div class="codehilite"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:iizukak/mdsite.git
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>mdsite
 $<span class="w"> </span>make<span class="w"> </span>install
@@ -85,13 +99,13 @@ $<span class="w"> </span>make<span class="w"> </span>install
 <p>Syntax highlighting is supported. Use triple <code>`</code> to write the code.</p>
 <div class="codehilite"><pre><span></span><code>```python
 def hello():
-    print(&quot;Hello, mdsite&quot;)
+    print("Hello, mdsite")
 ```
 </code></pre></div>
 
 <p>is converted to</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, mdsite&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello, mdsite"</span><span class="p">)</span>
 </code></pre></div>
 
 <h3>MathJax Support</h3>
@@ -127,8 +141,8 @@ For example,</p>
 <h2>License</h2>
 <p><a href="https://spdx.org/licenses/Apache-2.0.html">Apache License 2.0</a></p>
     <footer>
-      <p>created at: 2022/11/01, updated at: 2023/07/24</p>
-      <p>IIZUKA Kentaro © 2023</p>
+      <p>created at: 2026/10/30, updated at: 2026/10/30</p>
+      <p>IIZUKA Kentaro © 2026</p>
     </footer>
   </body>
 </html>
