@@ -21,7 +21,10 @@ dependencies = [
 dev = [
     "black>=26.10.1",
     "isort>=9.0.2",
+    "mypy>=2.4.0",
     "pytest>=9.1.1",
+    "types-markdown>=3.10.2.20261007",
+    "types-pyyaml>=6.0.12.20260906",
 ]
 
 [project.scripts]
@@ -39,3 +42,7 @@ packages = ["mdsite"]
 
 [tool.setuptools.package-data]
 mdsite = ["template/*"]
+
+[tool.mypy]
+files = ["mdsite", "tests"]
+strict = true

@@ -10,6 +10,10 @@ devinstall:
 test:
 	uv run pytest -s tests
 
+.PHONY: typecheck
+typecheck:
+	uv run mypy
+
 .PHONY: testserver
 testserver: test
 	cd tests/out && python3 -m http.server

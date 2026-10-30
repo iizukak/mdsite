@@ -17,4 +17,5 @@ jobs:
       - name: pytest
         run: |
             make devinstall
+            make typecheck
             make test
