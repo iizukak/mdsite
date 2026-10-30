@@ -25,8 +25,8 @@ def render(tmp_path: Path) -> str:
         path=tmp_path / "index.md",
         output_path=tmp_path / "index.html",
         output_dir=tmp_path,
-        created_at=0,
-        edited_at=0,
+        created_at=0.0,
+        edited_at=0.0,
         contents=CONTENTS,
         title="math",
         link="index.html",
@@ -37,7 +37,7 @@ def render(tmp_path: Path) -> str:
     return (tmp_path / "index.html").read_text()
 
 
-def test_template_loads_mathjax_4(tmp_path):
+def test_template_loads_mathjax_4(tmp_path: Path) -> None:
     html = render(tmp_path)
     assert "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" in html
     # MathJax 2 の読み込みや設定が残っていない
@@ -45,7 +45,7 @@ def test_template_loads_mathjax_4(tmp_path):
     assert "MathJax.Hub" not in html
 
 
-def test_template_converts_mathjax_2_script_tags(tmp_path):
+def test_template_converts_mathjax_2_script_tags(tmp_path: Path) -> None:
     # python-markdown-math は MathJax 2 形式の script タグを出力するため、
     # テンプレート側で MathJax 4 の数式に変換する処理が必要になる
     html = render(tmp_path)
@@ -53,7 +53,7 @@ def test_template_converts_mathjax_2_script_tags(tmp_path):
     assert 'script[type^="math/tex"]' in html
 
 
-def test_inline_math_is_left_for_mathjax(tmp_path):
+def test_inline_math_is_left_for_mathjax(tmp_path: Path) -> None:
     # インライン数式は MathJax が $...$ をページ上で処理する
     html = render(tmp_path)
     assert "Inline $e^x$ and <code>$code$</code>." in html

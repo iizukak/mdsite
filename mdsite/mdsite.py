@@ -9,6 +9,7 @@ import subprocess
 from datetime import date
 from importlib.metadata import version
 from pathlib import Path
+from typing import Any
 
 import yaml
 from jinja2 import Template
@@ -22,8 +23,8 @@ class MarkDownFile:
     path: Path
     output_path: Path
     output_dir: Path
-    created_at: str
-    edited_at: str
+    created_at: float
+    edited_at: float
     contents: str
     title: str
     link: str
@@ -41,21 +42,21 @@ def parse_command_line_args() -> argparse.Namespace:
     return args
 
 
-def print_version():
+def print_version() -> None:
     v = version("mdsite")
     print("mdsite version: " + v)
 
 
-def parse_config(config_file_name: str) -> dict:
+def parse_config(config_file_name: str) -> dict[str, Any]:
     with open(config_file_name) as file:
-        config = yaml.safe_load(file)
+        config: dict[str, Any] = yaml.safe_load(file)
     print("load settings...")
     pprint.pprint(config)
     print()
     return config
 
 
-def load_template() -> tuple[str, str, str]:
+def load_template() -> tuple[str, str]:
     # Load jinja2 template files.
     pkg = importlib.resources.files("mdsite")
     template_path = pkg / "template" / "template.html"
@@ -75,7 +76,7 @@ def calc_link_to_root(path: Path) -> str:
         return "../" * (len(path.parts) - 2)
 
 
-def is_excluded(path: Path, config: dict) -> bool:
+def is_excluded(path: Path, config: dict[str, Any]) -> bool:
     if "excludes" not in config.keys():
         return False
     for exclude in config["excludes"]:
@@ -86,7 +87,7 @@ def is_excluded(path: Path, config: dict) -> bool:
     return False
 
 
-def load_markdown_files(config: dict) -> list[MarkDownFile]:
+def load_markdown_files(config: dict[str, Any]) -> list[MarkDownFile]:
     # Load .md files in input_dir, recursively.
     # Retuen a list of MarkDown instances.
     print("collecting target markdown files...")
@@ -171,7 +172,8 @@ def get_created_at(path: Path, stat: os.stat_result) -> float:
 
     # st_ctime は属性の変更日時であり作成日ではないため使わない
     # 作成日時が取得できない環境では最終更新日時で代用する
-    return getattr(stat, "st_birthtime", stat.st_mtime)
+    birthtime: float = getattr(stat, "st_birthtime", stat.st_mtime)
+    return birthtime
 
 
 def get_updated_at(path: Path, stat: os.stat_result) -> float:
@@ -190,18 +192,20 @@ def get_updated_at(path: Path, stat: os.stat_result) -> float:
     return stat.st_mtime
 
 
-def make_output_dirs(markdown_files: list[MarkDownFile]):
+def make_output_dirs(markdown_files: list[MarkDownFile]) -> None:
     # Make output directories recursively
     for markdown_file in markdown_files:
         os.makedirs(markdown_file.output_dir, exist_ok=True)
 
 
-def make_time_str(timestamp: str, config: dict) -> str:
+def make_time_str(timestamp: float, config: dict[str, Any]) -> str:
     d = date.fromtimestamp(int(timestamp))
     return d.strftime(config["date_format"])
 
 
-def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
+def convert_page(
+    markdown_file: MarkDownFile, config: dict[str, Any], template: str
+) -> None:
     # Convert a MarkDown instance into .html.
     markdown_html = markdown(
         markdown_file.contents, extensions=["fenced_code", "codehilite", "mdx_math"]
@@ -209,8 +213,8 @@ def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)
     year = date.today().year
-    template = Template(source=template)
-    converted_html = template.render(
+    jinja_template = Template(source=template)
+    converted_html = jinja_template.render(
         contents=markdown_html,
         config=config,
         created_at=created_at,
@@ -222,25 +226,27 @@ def convert_page(markdown_file: MarkDownFile, config: dict, template: str):
         f.write(converted_html)
 
 
-def convert(markdown_files: list[MarkDownFile], config: dict, templates: str):
+def convert(
+    markdown_files: list[MarkDownFile], config: dict[str, Any], templates: str
+) -> None:
     for markdown_file in markdown_files:
         convert_page(markdown_file, config, templates)
 
 
-def write_css(css: str, config: dict):
+def write_css(css: str, config: dict[str, Any]) -> None:
     output_path = Path(config["output_dir"]) / css_file_name
     with open(output_path, "w") as f:
         f.write(css)
 
 
-def write_static(config: dict):
+def write_static(config: dict[str, Any]) -> None:
     input_static_dir = Path(config["input_dir"], "static")
     output_dir = Path(config["output_dir"], "static")
     if os.path.exists(input_static_dir):
         shutil.copytree(input_static_dir, output_dir, dirs_exist_ok=True)
 
 
-def main(config_file_name: str):
+def main(config_file_name: str) -> None:
     config = parse_config(config_file_name)
     template, css = load_template()
     markdown_files = load_markdown_files(config)
@@ -250,7 +256,7 @@ def main(config_file_name: str):
     write_static(config)
 
 
-def entrypoint():
+def entrypoint() -> None:
     args = parse_command_line_args()
     if args.version == True:
         print_version()
