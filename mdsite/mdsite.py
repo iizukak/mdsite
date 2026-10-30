@@ -208,7 +208,8 @@ def convert_page(
 ) -> None:
     # Convert a MarkDown instance into .html.
     markdown_html = markdown(
-        markdown_file.contents, extensions=["fenced_code", "codehilite", "mdx_math"]
+        markdown_file.contents,
+        extensions=["fenced_code", "codehilite", "tables", "mdx_math"],
     )
     created_at = make_time_str(markdown_file.created_at, config)
     updated_at = make_time_str(markdown_file.edited_at, config)

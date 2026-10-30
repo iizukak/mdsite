@@ -100,6 +100,22 @@ def hello():
     print("Hello, mdsite")
 ```
 
+### Table
+
+Tables are supported.
+
+```
+| Name   | Description                   |
+|--------|-------------------------------|
+| mdsite | Minimal Static Site Generator |
+```
+
+is converted to
+
+| Name   | Description                   |
+|--------|-------------------------------|
+| mdsite | Minimal Static Site Generator |
+
 ### MathJax Support
 
 Math equations are supported by [python-markdown-math](https://github.com/mitya57/python-markdown-math).

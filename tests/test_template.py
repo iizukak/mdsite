@@ -16,6 +16,10 @@ Inline $e^x$ and `$code$`.
 $$
 \\frac{1}{2}
 $$
+
+| Name | Value |
+|:-----|------:|
+| `a`  | 1     |
 """
 
 
@@ -74,3 +78,12 @@ def test_stylesheet_keeps_pygments_section() -> None:
     own, generated = css.split("/* DO NOT EDIT UNDER THIS LINE */")
     assert "--background: #efefef;" in own
     assert ".codehilite" in generated
+
+
+def test_table_is_rendered(tmp_path: Path) -> None:
+    # Markdown の表が table 要素に変換される
+    html = render(tmp_path)
+    assert "<table>" in html
+    assert '<th style="text-align: left;">Name</th>' in html
+    assert '<td style="text-align: right;">1</td>' in html
+    assert '<td style="text-align: left;"><code>a</code></td>' in html
