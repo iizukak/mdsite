@@ -151,7 +151,12 @@ $$
 
 - Which CSS framework mdsite use?
     - None. mdsite has its own stylesheet (`mdsite.css`) inspired by the design of 2channel in the Heisei era.
+- Which font mdsite use?
+    - [DotGothic16](https://github.com/fontworks-fonts/DotGothic16) by Fontworks Inc. is bundled to reproduce the look of bitmap fonts on old Windows browsers.
+      It is copied to the output directory with its license (`DotGothic16-OFL.txt`).
 
 ## License
 
 [Apache License 2.0](https://spdx.org/licenses/Apache-2.0.html)
+
+The bundled font DotGothic16 is licensed under the [SIL Open Font License 1.1](https://openfontlicense.org/).
