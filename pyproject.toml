@@ -8,6 +8,7 @@ name = "mdsite"
 version = "0.1.0"
 license = { file = "LICENSE" }
 description = "Minimal Static Site Generator."
+requires-python = ">=3.10"
 dependencies = [
     "jinja2",
     "markdown",
@@ -16,8 +17,12 @@ dependencies = [
     "python-markdown-math",
 ]
 
-[project.optional-dependencies]
-dev = ["pytest", "black", "isort"]
+[dependency-groups]
+dev = [
+    "black>=26.10.1",
+    "isort>=9.0.2",
+    "pytest>=9.1.1",
+]
 
 [project.scripts]
 mdsite = "mdsite.mdsite:entrypoint"
@@ -26,12 +31,6 @@ mdsite = "mdsite.mdsite:entrypoint"
 homepage = "https://iizukak.github.io/mdsite/"
 documentation = "https://github.com/iizukak/mdsite/blob/main/README.md"
 repository = "https://github.com/iizukak/mdsite"
-
-[tool]
-rye = { dev-dependencies = [
-    "black>=26.10.1",
-    "pytest>=9.1.1",
-] }
 
 [tool.setuptools]
 zip-safe = false

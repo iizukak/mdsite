@@ -1,14 +1,14 @@
 .PHONY: install
 install:
-	pip3 install -e .
+	uv tool install --editable .
 
 .PHONY: devinstall
 devinstall:
-	pip3 install -e ".[dev]"
+	uv sync
 
 .PHONY: test
 test:
-	pytest -s tests
+	uv run pytest -s tests
 
 .PHONY: testserver
 testserver: test
@@ -16,7 +16,7 @@ testserver: test
 
 .PHONY: demo
 demo:
-	mdsite --config demo.yaml
+	uv run mdsite --config demo.yaml
 
 .PHONY: demoserver
 demoserver: demo

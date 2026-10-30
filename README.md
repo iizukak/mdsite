@@ -34,7 +34,7 @@ Please check the [example config file](https://github.com/iizukak/mdsite/blob/ma
 
 ## Installation
 
-mdsite requires Python 3.8 or later and GNU Make.
+mdsite requires Python 3.10 or later, [uv](https://docs.astral.sh/uv/) and GNU Make.
 
 ```
 $ git clone git@github.com:iizukak/mdsite.git
