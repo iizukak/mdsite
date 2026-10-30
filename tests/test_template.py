@@ -58,3 +58,19 @@ def test_inline_math_is_left_for_mathjax(tmp_path: Path) -> None:
     html = render(tmp_path)
     assert "Inline $e^x$ and <code>$code$</code>." in html
     assert "inlineMath: [ ['$','$']" in html
+
+
+def test_template_uses_bundled_stylesheet(tmp_path: Path) -> None:
+    # 外部の CSS フレームワークに依存せず、同梱の mdsite.css だけを読み込む
+    html = render(tmp_path)
+    assert '<link rel="stylesheet" href="./mdsite.css">' in html
+    assert html.count('rel="stylesheet"') == 1
+    assert "water.css" not in html
+
+
+def test_stylesheet_keeps_pygments_section() -> None:
+    # 独自スタイルを追加しても、Pygments の生成部分が末尾に残っている
+    _, css = mdsite.load_template()
+    own, generated = css.split("/* DO NOT EDIT UNDER THIS LINE */")
+    assert "--background: #efefef;" in own
+    assert ".codehilite" in generated

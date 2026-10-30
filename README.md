@@ -134,7 +134,7 @@ $$
 ## FAQ
 
 - Which CSS framework mdsite use?
-    - [water.css](https://watercss.kognise.dev/)
+    - None. mdsite has its own stylesheet (`mdsite.css`) inspired by the design of 2channel in the Heisei era.
 
 ## License
 
