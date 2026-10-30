@@ -41,7 +41,6 @@
 <p><a href="https://github.com/iizukak/mdsite/actions/workflows/test.yaml"><img alt="example workflow" src="https://github.com/iizukak/mdsite/actions/workflows/test.yaml/badge.svg" /></a></p>
 <p>mdsite is a command line tool that generates a static site from Markdown files.</p>
 <p><a href="https://iizukak.github.io/mdsite/">demo</a>,
-<a href="https://iizukak.github.io/mdsite/ja.html">Japanese sample</a>,
 <a href="https://github.com/iizukak/mdsite">repository</a>.</p>
 <h2>What mdsite do</h2>
 <p>mdsite converts <code>.md</code> files into <code>.html</code> files in the same directory structure.</p>
@@ -153,6 +152,103 @@ For example,</p>
 {1+\frac{e^{-8\pi}} {1+\ldots} } } }
 </script>
 </p>
+<h2>Japanese sample</h2>
+<p>The following is a sample in Japanese, written like a thread on 2channel.</p>
+<h3>【静的サイト】mdsite 総合スレ Part1</h3>
+<h4>1 ：名無しさん：2026/10/30(木) 12:00:00</h4>
+<p>Markdown から静的サイトを作るツール mdsite について語るスレです。</p>
+<ul>
+<li>公式: <a href="https://github.com/iizukak/mdsite">https://github.com/iizukak/mdsite</a></li>
+<li>デモ: <a href="https://iizukak.github.io/mdsite/">https://iizukak.github.io/mdsite/</a></li>
+</ul>
+<p>荒らしは放置でお願いします。</p>
+<h4>2 ：名無しさん：2026/10/30(木) 12:00:12</h4>
+<p>2げっと</p>
+<h4>3 ：名無しさん：2026/10/30(木) 12:03:45</h4>
+<blockquote>
+<p>2げっと</p>
+</blockquote>
+<p>ずさーっ</p>
+<h4>4 ：名無しさん：2026/10/30(木) 12:10:21</h4>
+<p>インストール方法を教えてください。</p>
+<h4>5 ：名無しさん：2026/10/30(木) 12:15:08</h4>
+<blockquote>
+<p>インストール方法を教えてください。</p>
+</blockquote>
+<p>uv と GNU Make が入っていれば、これだけでいけます。</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:iizukak/mdsite.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>mdsite
+$<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+
+<p>あとは <code>mdsite.yaml</code> を置いたディレクトリで <code>mdsite</code> を実行するだけです。</p>
+<h4>6 ：名無しさん：2026/10/30(木) 12:20:33</h4>
+<p>対応している書き方をまとめてみた。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">書き方</th>
+<th style="text-align: center;">対応</th>
+<th style="text-align: left;">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">見出し</td>
+<td style="text-align: center;">○</td>
+<td style="text-align: left;"><code>#</code> から <code>######</code> まで</td>
+</tr>
+<tr>
+<td style="text-align: left;">表</td>
+<td style="text-align: center;">○</td>
+<td style="text-align: left;">列ごとの左寄せ・中央・右寄せも可</td>
+</tr>
+<tr>
+<td style="text-align: left;">コード</td>
+<td style="text-align: center;">○</td>
+<td style="text-align: left;">言語を書くと色が付く</td>
+</tr>
+<tr>
+<td style="text-align: left;">数式</td>
+<td style="text-align: center;">○</td>
+<td style="text-align: left;">MathJax で表示</td>
+</tr>
+</tbody>
+</table>
+<h4>7 ：名無しさん：2026/10/30(木) 12:25:47</h4>
+<p>コードに色が付くのはいいね。</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"こんにちは、</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">さん"</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="s2">"名無し"</span><span class="p">))</span>
+</code></pre></div>
+
+<h4>8 ：名無しさん：2026/10/30(木) 12:31:02</h4>
+<p>数式も書けるのか。$e^{i\pi} + 1 = 0$ みたいな行内の式も、</p>
+<p>
+<script type="math/tex; mode=display">
+\sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+</script>
+</p>
+<p>みたいな独立した式もいける。</p>
+<h4>9 ：名無しさん：2026/10/30(木) 12:40:59</h4>
+<p>今どき静的サイトジェネレータとか誰が使うんだよ</p>
+<h4>10 ：名無しさん：2026/10/30(木) 12:41:30</h4>
+<div class="codehilite"><pre><span></span><code>　　 ∧＿∧
+　　（　´∀｀）＜　オマエモナー
+</code></pre></div>
+
+<h4>11 ：名無しさん：2026/10/30(木) 12:50:14</h4>
+<p>手順をまとめると、</p>
+<ol>
+<li><code>mdsite.yaml</code> を書く</li>
+<li><code>in/</code> に Markdown を置く</li>
+<li><code>mdsite</code> を実行する</li>
+<li><code>out/</code> に HTML ができる</li>
+</ol>
+<hr />
+<p>このスレッドは過去ログ倉庫に格納されています。</p>
 <h2>FAQ</h2>
 <ul>
 <li>Which CSS framework mdsite use?<ul>
