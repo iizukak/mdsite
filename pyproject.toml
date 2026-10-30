@@ -29,8 +29,8 @@ repository = "https://github.com/iizukak/mdsite"
 
 [tool]
 rye = { dev-dependencies = [
-    "black>=23.9.1",
-    "pytest>=7.4.2",
+    "black>=26.10.1",
+    "pytest>=9.1.1",
 ] }
 
 [tool.setuptools]
