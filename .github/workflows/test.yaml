@@ -16,6 +16,7 @@ jobs:
 
       - name: pytest
         run: |
+            uv lock --check
             make devinstall
             make typecheck
             make test

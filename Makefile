@@ -4,15 +4,15 @@ install:
 
 .PHONY: devinstall
 devinstall:
-	uv sync
+	uv sync --frozen
 
 .PHONY: test
 test:
-	uv run pytest -s tests
+	uv run --frozen pytest -s tests
 
 .PHONY: typecheck
 typecheck:
-	uv run mypy
+	uv run --frozen mypy
 
 .PHONY: testserver
 testserver: test
@@ -20,7 +20,7 @@ testserver: test
 
 .PHONY: demo
 demo:
-	uv run mdsite --config demo.yaml
+	uv run --frozen mdsite --config demo.yaml
 
 .PHONY: demoserver
 demoserver: demo
