@@ -1,6 +1,7 @@
-from mdsite import mdsite
 import os
 import shutil
+
+from mdsite import mdsite
 
 
 def test_main_with_no_output():
