@@ -6,19 +6,33 @@
     <title>{{config.title}}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="{{markdown.link_to_root}}mdsite.css">
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
+    <script>
+      window.MathJax = {
+        tex: {
           inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
           processEscapes: true
         },
-        "HTML-CSS": { fonts: ["TeX"] }
-      });
+        options: {
+          renderActions: {
+            // python-markdown-math が出力する MathJax 2 形式の
+            // <script type="math/tex"> を MathJax 4 の数式として登録する
+            findScript: [10, function (doc) {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+              }
+            }, '']
+          }
+        }
+      };
     </script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
   </head>
   <body>
     <header>
