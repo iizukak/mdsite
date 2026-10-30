@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 authors = [{ name = "Kentaro Iizuka", email = "iizuka.kentaro@gmail.com" }]
 name = "mdsite"
-version = "0.1.0"
+version = "1.0.0"
 license = { file = "LICENSE" }
 description = "Minimal Static Site Generator."
 requires-python = ">=3.10"
