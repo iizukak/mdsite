@@ -5,6 +5,7 @@
 mdsite is a command line tool that generates a static site from Markdown files.
 
 [demo](https://iizukak.github.io/mdsite/),
+[Japanese sample](https://iizukak.github.io/mdsite/ja.html),
 [repository](https://github.com/iizukak/mdsite).
 
 ## What mdsite do
