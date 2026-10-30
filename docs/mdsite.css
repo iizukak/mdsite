@@ -152,12 +152,15 @@ img {
   height: auto;
 }
 
-/* アスキーアート向けの等幅フォント */
+/*
+ * コードも本文と同じ DotGothic16 にする
+ * DotGothic16 は半角が全角のちょうど半分の幅で、ＭＳ ゴシックと同じく等幅として使える
+ */
 code,
 pre {
-  font-family: "MS Gothic", "ＭＳ ゴシック", "IPAMonaGothic", "IPAGothic",
+  font-family: "DotGothic16", "MS Gothic", "ＭＳ ゴシック", "IPAGothic",
     monospace;
-  font-size: 0.95em;
+  font-size: 16px;
 }
 
 pre {
