@@ -130,7 +130,7 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
             output_path=output_path,
             output_dir=output_dir,
             created_at=created_at,
-            edited_at=stat.st_mtime,
+            edited_at=get_updated_at(path, stat),
             contents=contents,
             title=title,
             link=link,
@@ -142,36 +142,52 @@ def load_markdown_files(config: dict) -> list[MarkDownFile]:
     return markdown_files
 
 
-def get_created_at(path: Path, stat: os.stat_result) -> float:
-    # Git 管理下のファイルは、最初に追加されたコミットの日時を作成日とする
-    # シンボリックリンクはリンク先の履歴を参照する
-    real_path = path.resolve()
+def run_git(args: list[str], path: Path) -> str | None:
+    # path のあるディレクトリで git を実行し、標準出力を返す
+    # git が無い、または Git リポジトリ外の場合は None を返す
     try:
         result = subprocess.run(
-            [
-                "git",
-                "log",
-                "--follow",
-                "--diff-filter=A",
-                "--format=%at",
-                "--",
-                real_path.name,
-            ],
-            cwd=real_path.parent,
+            ["git", *args],
+            cwd=path.parent,
             capture_output=True,
             text=True,
             check=True,
         )
-        timestamps = result.stdout.split()
-        if timestamps:
-            return float(timestamps[-1])
     except (OSError, subprocess.CalledProcessError):
-        # git が無い、または Git リポジトリ外の場合はファイルシステムの情報を使う
-        pass
+        return None
+    return result.stdout
+
+
+def get_created_at(path: Path, stat: os.stat_result) -> float:
+    # Git 管理下のファイルは、最初に追加されたコミットの日時を作成日とする
+    # シンボリックリンクはリンク先の履歴を参照する
+    real_path = path.resolve()
+    output = run_git(
+        ["log", "--follow", "--diff-filter=A", "--format=%at", "--", real_path.name],
+        real_path,
+    )
+    if output:
+        return float(output.split()[-1])
 
     # st_ctime は属性の変更日時であり作成日ではないため使わない
     # 作成日時が取得できない環境では最終更新日時で代用する
     return getattr(stat, "st_birthtime", stat.st_mtime)
+
+
+def get_updated_at(path: Path, stat: os.stat_result) -> float:
+    # Git 管理下で未変更のファイルは、最後に変更されたコミットの日時を更新日とする
+    # st_mtime は clone や checkout の日時になってしまうため使わない
+    real_path = path.resolve()
+    status = run_git(["status", "--porcelain", "--", real_path.name], real_path)
+    # 未コミットの変更がある、または未追跡のファイルは作業中の内容なので最終更新日時を使う
+    if status == "":
+        output = run_git(
+            ["log", "-1", "--follow", "--format=%at", "--", real_path.name],
+            real_path,
+        )
+        if output:
+            return float(output.strip())
+    return stat.st_mtime
 
 
 def make_output_dirs(markdown_files: list[MarkDownFile]):
