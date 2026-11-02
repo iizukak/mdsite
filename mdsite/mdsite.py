@@ -16,8 +16,6 @@ from jinja2 import Template
 from markdown import markdown
 
 css_file_name = "mdsite.css"
-# CSS から参照する同梱フォントと、そのライセンス（SIL OFL 1.1 で再配布時に同梱が必要）
-font_file_names = ["DotGothic16-Regular.woff2", "DotGothic16-OFL.txt"]
 
 
 @dataclasses.dataclass
@@ -242,14 +240,6 @@ def write_css(css: str, config: dict[str, Any]) -> None:
         f.write(css)
 
 
-def write_fonts(config: dict[str, Any]) -> None:
-    # 同梱フォントを CSS と同じ出力先のルートにコピーする
-    pkg = importlib.resources.files("mdsite")
-    for font_file_name in font_file_names:
-        data = (pkg / "template" / font_file_name).read_bytes()
-        (Path(config["output_dir"]) / font_file_name).write_bytes(data)
-
-
 def write_static(config: dict[str, Any]) -> None:
     input_static_dir = Path(config["input_dir"], "static")
     output_dir = Path(config["output_dir"], "static")
@@ -264,7 +254,6 @@ def main(config_file_name: str) -> None:
     make_output_dirs(markdown_files)
     convert(markdown_files, config, (template))
     write_css(css, config)
-    write_fonts(config)
     write_static(config)
 
 

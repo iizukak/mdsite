@@ -1,4 +1,3 @@
-import importlib.resources
 from pathlib import Path
 
 from mdsite import mdsite
@@ -90,14 +89,7 @@ def test_table_is_rendered(tmp_path: Path) -> None:
     assert '<td style="text-align: left;"><code>a</code></td>' in html
 
 
-def test_bundled_font_is_available() -> None:
-    # CSS の @font-face が参照するフォントと、そのライセンスが同梱されている
+def test_no_web_font_is_used() -> None:
+    # ウェブフォントを使わず、閲覧者の環境にあるフォントだけで表示する
     _, css = mdsite.load_template()
-    assert 'url("DotGothic16-Regular.woff2")' in css
-    template_dir = importlib.resources.files("mdsite") / "template"
-    for font_file_name in mdsite.font_file_names:
-        assert (template_dir / font_file_name).is_file()
-    font = (template_dir / "DotGothic16-Regular.woff2").read_bytes()
-    assert font[:4] == b"wOF2"
-    license = (template_dir / "DotGothic16-OFL.txt").read_text()
-    assert "SIL Open Font License, Version 1.1" in license
+    assert "@font-face" not in css

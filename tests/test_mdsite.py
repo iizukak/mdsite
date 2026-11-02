@@ -21,9 +21,6 @@ def assert_outputs() -> None:
     assert (OUTPUT_DIR / "index.html").is_file()
     assert (OUTPUT_DIR / "dir" / "subdir.html").is_file()
     assert (OUTPUT_DIR / "mdsite.css").is_file()
-    # 同梱フォントとそのライセンスが CSS と同じ場所に出力される
-    assert (OUTPUT_DIR / "DotGothic16-Regular.woff2").is_file()
-    assert (OUTPUT_DIR / "DotGothic16-OFL.txt").is_file()
     assert (OUTPUT_DIR / "static" / "sample.jpg").is_file()
 
 
